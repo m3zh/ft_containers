@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 07:34:38 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/04/23 15:42:28 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/04/24 16:24:11 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ namespace ft
 
 		public:
 			typedef value_type&			                        reference;
-			typedef const  	value_type&                     	const_reference;
+			typedef const  	 value_type&                     	const_reference;
 			typedef typename Alloc::pointer			        	pointer;
 			typedef typename Alloc::const_pointer		    	const_pointer;
 
@@ -112,10 +112,10 @@ namespace ft
 				return *this;
 			}
 
-			allocator_type			get_allocator( void ) const		{	return this->_alloc;	};
+			allocator_type		get_allocator( void ) const			{	return this->_alloc;	};
 			
 			// [ ELEMENT ACCESS ]
-			mapped_type& operator[] ( const key_type& k )	{	return (*(insert(ft::make_pair( k, mapped_type() )).first)).second;			};
+			mapped_type&		operator[] ( const key_type& k )	{	return (*(insert(ft::make_pair( k, mapped_type() )).first)).second;			};
 
 			// [ ITERATORS ]
 			iterator begin()								{	return	_tree.begin();		};

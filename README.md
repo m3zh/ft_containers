@@ -42,4 +42,4 @@ Next, execute the following command to run the tests:
 The structure of this repository does **not** necessarily follow the guidelines.
 
 ## License
-Everything in this repository is released under the [Unlicense](https://github.com/maxdesalle/ft_containers/blob/main/LICENSE).
+Everything in this repository is released under the [Unlicense](https://github.com/mlazzare e/ft_containers/blob/main/LICENSE).
