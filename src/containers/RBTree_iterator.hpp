@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 10:47:47 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/04/24 17:11:33 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/04/24 18:36:03 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ struct node {
     node( T const& value, node *parent, int leaf )   :      value(value),
                                                             parent (parent), left(0), right(0),
                                                             color( RED ), leaf(leaf)         {};
-    node( node const& t )   :   value(t.value),
+    template < typename T2 >
+    node( node< T2 > const& t )   :   value(t.value),
                                         parent (t.parent), left(t.left), right(t.right),
                                         color( t.color ), leaf(t.leaf) {};
     node const&     operator = ( node const& t )
@@ -58,8 +59,6 @@ class treeIterator
 {
     public:
 
-		typedef treeIterator< U >				iterator;
-		typedef treeIterator< const U >	        const_iterator;
         typedef U								value_type;
         typedef U*								pointer;
         typedef const U*						const_pointer;
@@ -68,18 +67,25 @@ class treeIterator
         typedef std::ptrdiff_t					difference_type;
         typedef std::bidirectional_iterator_tag	iterator_category;
         typedef node< value_type >              treeNode;
+        typedef node< const value_type >        const_treeNode;
+		typedef treeIterator< U >				iterator;
+		typedef const treeIterator< const U >	        const_iterator;
 
-        treeIterator( void ) :  _node(NULL)                     {};
+        treeIterator( void ) :  _node(NULL)                      {};
         treeIterator( treeNode * current ) : _node(current)      {};
-        treeIterator( treeIterator const& t ) : _node(t.node())  {};
-        treeIterator		operator = ( treeIterator t )       {       _node = t.node(); return *this;                              };
-        treeNode            *node( void )                       {       return _node;                                               };
-        treeNode            *node( void )   const               {       return _node;                                               };
+        // treeIterator( const_treeNode * current ) : _node(current)      {};
 
-        reference		operator* () 							{   return _node->value;    };
-        const_reference	operator* () const						{   return _node->value;    };
-        pointer			operator->()							{   return &_node->value;   };
-        const_pointer	operator->() const						{   return &_node->value;   };
+        template < class _it >
+        treeIterator( treeIterator< _it > const& t ) : _node(reinterpret_cast<treeNode *>(t.node()))  {};
+        treeIterator&		operator = ( treeIterator const & t )        {       _node = t.node(); return *this;         };
+        // treeNode            *node( void )                        {       return _node;                           };
+        treeNode            *node( )   const                {       return _node;                           };
+        // operator            const_iterator () const				 {   return iterator(_node);    }
+
+        reference		operator* () 							 {       return _node->value;                    };
+        const_reference	operator* () const						 {       return _node->value;                    };
+        pointer			operator->()							 {       return &_node->value;                   };
+        const_pointer	operator->() const						 {       return &_node->value;                   };
 
         treeIterator&		operator ++ ()
         {
@@ -121,13 +127,15 @@ class treeIterator
             }
             return *this;
         }
-        treeIterator		operator ++ ( int )							{   treeIterator ptr(*this); operator++(); return ptr;  }
-        treeIterator		operator -- ( int )							{   treeIterator ptr(*this); operator--(); return ptr;  }
+        treeIterator		operator ++ ( int )							    {   treeIterator ptr(*this); operator++(); return ptr;  }
+        treeIterator		operator -- ( int )							    {   treeIterator ptr(*this); operator--(); return ptr;  }
 
-        bool			    operator == ( treeIterator const& t )	const	{   return _node == t._node;    }
-        bool			    operator != ( treeIterator const& t )	const	{   return _node != t._node;    }
+        friend
+        bool			    operator == ( treeIterator const& l, treeIterator const& r )	{   return l.node() == r.node();    }
+        friend
+        bool			    operator != ( treeIterator const& l, treeIterator const& r )	{   return l.node() != r.node();    }
 
-        operator            const_iterator () const						    {   return iterator(_node);    }
+        
         
         private:
             treeNode*			    _node;

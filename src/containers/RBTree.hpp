@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 10:47:47 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/04/24 17:11:40 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/04/24 18:36:31 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,13 +268,13 @@ class RBTree
         }
         const_iterator			begin( void ) const
         {
-            if (_root == NIL)        return const_iterator(nullptr);
+            if (_root == NIL)        return treeIterator< const T>(nullptr);
             treeNode* first = _root;
             while (first->left != NIL) first = first->left;
-            return const_iterator(first);
+            return iterator(first);
         }
         iterator				end()				{       return iterator(max(_root));                         }
-        const_iterator			end() const			{       return const_iterator(max(_root));                   }
+        const_iterator			end() const			{       return iterator(max(_root));                   }
         reverse_iterator		rbegin()			{       return reverse_iterator(end());                 }
         const_reverse_iterator	rbegin() const		{       return const_reverse_iterator(end());           }
         reverse_iterator		rend()				{       return reverse_iterator(begin());               }
