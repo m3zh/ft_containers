@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 11:22:01 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/04/24 16:17:23 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/04/24 17:12:22 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,7 @@
 # include <iostream>
 
 # include "../src/containers/stack.hpp"
-
-void	decorator(std::string title)
-{
-	int space = (20 - title.length()) / 2;
-	std::cout << "#####";
-	for (int i = 0; i < space; i += 1)
-		std::cout << " ";
-	std::cout << "\x1B[31m" << title << "\033[0m";
-	for (int i = 0; i < space; i += 1)
-		std::cout << " ";
-	std::cout << "#####";
-	std::cout << std::endl;
-}
+# include "utils.cpp"
 
 void	std_constructor(void)
 {
@@ -234,48 +222,20 @@ void	ft_swaps(void)
 	bar.push (111); bar.push(222);
 
 	swap(foo,bar);
-
 	std::cout << "size of foo and bar: " << foo.size() << ", " << bar.size();
-}
-
-void	caller(void (*f1)(void), void (*f2)(void), std::string title)
-{
-	std::cout << std::endl;
-	decorator(title);
-
-	std::cout << "\x1B[36mft:\033[0m\t";
-	std::chrono::steady_clock::time_point b1 = std::chrono::high_resolution_clock::now();
-	f1();
-	std::chrono::steady_clock::time_point e1 = std::chrono::high_resolution_clock::now();
-	std::cout << " (" << std::chrono::duration_cast<std::chrono::microseconds>(e1 - b1).count() << " microseconds)" << std::endl;
-
-	std::cout << "\x1B[33mstd:\033[0m\t";
-	std::chrono::steady_clock::time_point b2 = std::chrono::high_resolution_clock::now();
-	f2();
-	std::chrono::steady_clock::time_point e2 = std::chrono::high_resolution_clock::now();
-	std::cout << " (" << std::chrono::duration_cast<std::chrono::microseconds>(e2 - b2).count() << " microseconds)" << std::endl;
-
-	std::cout << std::endl;
-}
-
-void	test_start(void)
-{
-	caller(ft_constructor, std_constructor, "constructor");
-	caller(ft_empty, std_empty, "empty");
-	caller(ft_size, std_size, "size");
-	caller(ft_top, std_top, "top");
-	caller(ft_push, std_push, "push");
-	caller(ft_pop, std_pop, "pop");
-	caller(ft_relational_operators, std_relational_operators, "operators");
-	caller(ft_swaps, std_swaps, "swap (stack)");
 }
 
 int	main(void)
 {
-	std::cout << "##############################" << std::endl;
-	decorator("STACK");
-	std::cout << "##############################" << std::endl;
-	test_start();
+	header("STACK");
+	test_it(ft_constructor, std_constructor, "constructor");
+	test_it(ft_empty, std_empty, "empty");
+	test_it(ft_size, std_size, "size");
+	test_it(ft_top, std_top, "top");
+	test_it(ft_push, std_push, "push");
+	test_it(ft_pop, std_pop, "pop");
+	test_it(ft_relational_operators, std_relational_operators, "operators");
+	test_it(ft_swaps, std_swaps, "swap (stack)");
 
 	return (0);
 }

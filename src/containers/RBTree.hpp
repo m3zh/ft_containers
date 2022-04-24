@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 10:47:47 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/04/23 15:28:47 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/04/24 17:11:40 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include "type_traits.hpp"
 # include "iterator.hpp"
 # include "RBTree_iterator.hpp"
-# include "algorithm.hpp"
 # include "pair.hpp"
 
 template < class T, class Compare = std::less< T >, class Alloc = std::allocator<T> >

@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 11:22:01 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/04/24 16:17:23 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/04/24 17:12:18 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,8 @@
 # include	<chrono>
 
 # include	"../src/containers/vector.hpp"
-# include	"../src/utilities/iterator.hpp"
-
-void	decorator(std::string title)
-{
-	int space = (20 - title.length()) / 2;
-	std::cout << "#####";
-	for (int i = 0; i < space; i += 1)
-		std::cout << " ";
-	std::cout << "\x1B[31m" << title << "\033[0m";
-	for (int i = 0; i < space; i += 1)
-		std::cout << " ";
-	std::cout << "#####";
-	std::cout << std::endl;
-}
+# include	"../src/containers/iterator.hpp"
+# include   "utils.cpp"
 
 void	std_constructor(void)
 {
@@ -41,7 +29,7 @@ void	std_constructor(void)
 	int myints[] = {16,2,77,29};
 	std::vector<int> fifth (myints, myints + sizeof(myints) / sizeof(int) );
 
-	std::cout << "The contents of fifth are:";
+	std::cout << "The contents of fifth are:\n";
 	for (std::vector<int>::iterator it = fifth.begin(); it != fifth.end(); ++it)
 		std::cout << ' ' << *it;
 }
@@ -57,7 +45,7 @@ void	ft_constructor(void)
 	int myints[] = {16,2,77,29};
 	ft::vector<int> fifth (myints, myints + sizeof(myints) / sizeof(int) );
 
-	std::cout << "The contents of fifth are:";
+	std::cout << "The contents of fifth are:\n";
 	for (ft::vector<int>::iterator it = fifth.begin(); it != fifth.end(); ++it)
 		std::cout << ' ' << *it;
 }
@@ -70,7 +58,7 @@ void	std_operator_equal(void)
 	bar = foo;
 	foo = std::vector<int>();
 
-	std::cout << "Size of foo and bar: " << int(foo.size()) << " and " << int(bar.size());
+	std::cout << "Size of foo and bar:\n" << int(foo.size()) << " and " << int(bar.size());
 }
 
 void	ft_operator_equal(void)
@@ -81,7 +69,7 @@ void	ft_operator_equal(void)
 	bar = foo;
 	foo = ft::vector<int>();
 
-	std::cout << "Size of foo and bar: " << int(foo.size()) << " and " << int(bar.size());
+	std::cout << "Size of foo and bar:\n" << int(foo.size()) << " and " << int(bar.size());
 }
 
 void	std_begin(void)
@@ -89,7 +77,7 @@ void	std_begin(void)
 	std::vector<int> myvector;
 	for (int i=1; i<=5; i++) myvector.push_back(i);
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (std::vector<int>::iterator it = myvector.begin() ; it != myvector.end(); ++it)
 		std::cout << ' ' << *it;
 }
@@ -99,7 +87,7 @@ void	ft_begin(void)
 	ft::vector<int> myvector;
 	for (int i=1; i<=5; i++) myvector.push_back(i);
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (ft::vector<int>::iterator it = myvector.begin() ; it != myvector.end(); ++it)
 		std::cout << ' ' << *it;
 }
@@ -109,7 +97,7 @@ void	std_end(void)
 	std::vector<int> myvector;
 	for (int i=1; i<=5; i++) myvector.push_back(i);
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (std::vector<int>::iterator it = myvector.begin() ; it != myvector.end(); ++it)
 		std::cout << ' ' << *it;
 }
@@ -119,7 +107,7 @@ void	ft_end(void)
 	ft::vector<int> myvector;
 	for (int i=1; i<=5; i++) myvector.push_back(i);
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (ft::vector<int>::iterator it = myvector.begin() ; it != myvector.end(); ++it)
 		std::cout << ' ' << *it;
 }
@@ -134,7 +122,7 @@ void	std_rbegin(void)
 	for (; rit!= myvector.rend(); ++rit)
 		*rit = ++i;
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
 		std::cout << ' ' << *it;
 }
@@ -149,7 +137,7 @@ void	ft_rbegin(void)
 	for (; rit!= myvector.rend(); ++rit)
 		*rit = ++i;
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (ft::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
 		std::cout << ' ' << *it;
 }
@@ -164,7 +152,7 @@ void	std_rend(void)
 	for (rit = myvector.rbegin(); rit!= myvector.rend(); ++rit)
 		*rit = ++i;
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
 		std::cout << ' ' << *it;
 }
@@ -179,7 +167,7 @@ void	ft_rend(void)
 	for (rit = myvector.rbegin(); rit!= myvector.rend(); ++rit)
 		*rit = ++i;
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (ft::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
 		std::cout << ' ' << *it;
 }
@@ -187,7 +175,7 @@ void	ft_rend(void)
 void	std_size(void)
 {
 	std::vector<int> myints;
-	std::cout << "size: " << myints.size();
+	std::cout << "size:\n" << myints.size();
 
 	for (int i=0; i<10; i++) myints.push_back(i);
 	std::cout << ", " << myints.size();
@@ -202,7 +190,7 @@ void	std_size(void)
 void	ft_size(void)
 {
 	ft::vector<int> myints;
-	std::cout << "size: " << myints.size();
+	std::cout << "size:\n" << myints.size();
 
 	for (int i=0; i<10; i++) myints.push_back(i);
 	std::cout << ", " << myints.size();
@@ -221,7 +209,7 @@ void	std_max_size(void)
 	// set some content in the vector:
 	for (int i=0; i<100; i++) myvector.push_back(i);
 
-	std::cout << "size, capacity and max_size: " << myvector.size();
+	std::cout << "size, capacity and max_size:\n" << myvector.size();
 	std::cout << ", " << myvector.capacity();
 	std::cout << " and " << myvector.max_size();
 }
@@ -233,7 +221,7 @@ void	ft_max_size(void)
 	// set some content in the vector:
 	for (int i=0; i<100; i++) myvector.push_back(i);
 
-	std::cout << "size, capacity and max_size: " << myvector.size();
+	std::cout << "size, capacity and max_size:\n" << myvector.size();
 	std::cout << ", " << myvector.capacity();
 	std::cout << " and " << myvector.max_size();
 }
@@ -249,7 +237,7 @@ void	std_resize(void)
 	myvector.resize(8,100);
 	myvector.resize(12);
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (size_t i=0;i<myvector.size();i++)
 		std::cout << ' ' << myvector[i];
 }
@@ -265,7 +253,7 @@ void	ft_resize(void)
 	myvector.resize(8,100);
 	myvector.resize(12);
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (size_t i=0;i<myvector.size();i++)
 		std::cout << ' ' << myvector[i];
 }
@@ -277,7 +265,7 @@ void	std_capacity(void)
 	// set some content in the vector:
 	for (int i=0; i<100; i++) myvector.push_back(i);
 
-	std::cout << "size, capacity and max_size: " << myvector.size();
+	std::cout << "size, capacity and max_size:\n" << myvector.size();
 	std::cout << ", " << myvector.capacity();
 	std::cout << " and " << myvector.max_size();
 }
@@ -289,7 +277,7 @@ void	ft_capacity(void)
 	// set some content in the vector:
 	for (int i=0; i<100; i++) myvector.push_back(i);
 
-	std::cout << "size, capacity and max_size: " << myvector.size();
+	std::cout << "size, capacity and max_size:\n" << myvector.size();
 	std::cout << ", " << myvector.capacity();
 	std::cout << " and " << myvector.max_size();
 }
@@ -307,7 +295,7 @@ void	std_empty(void)
 		myvector.pop_back();
 	}
 
-	std::cout << "total: " << sum;
+	std::cout << "total:\n" << sum;
 }
 
 void	ft_empty(void)
@@ -323,7 +311,7 @@ void	ft_empty(void)
 		myvector.pop_back();
 	}
 
-	std::cout << "total: " << sum;
+	std::cout << "total:\n" << sum;
 }
 
 void	std_reserve(void)
@@ -332,7 +320,7 @@ void	std_reserve(void)
 
 	std::vector<int> foo;
 	sz = foo.capacity();
-	std::cout << "capacity changed: ";
+	std::cout << "capacity changed:\n";
 	for (int i=0; i<100; ++i) {
 		foo.push_back(i);
 		if (sz!=foo.capacity()) {
@@ -359,7 +347,7 @@ void	ft_reserve(void)
 
 	ft::vector<int> foo;
 	sz = foo.capacity();
-	std::cout << "capacity changed: ";
+	std::cout << "capacity changed:\n";
 	for (int i=0; i<100; ++i) {
 		foo.push_back(i);
 		if (sz!=foo.capacity()) {
@@ -398,7 +386,7 @@ void	std_operator_brackets(void)
 		myvector[i]=temp;
 	}
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<sz; i++)
 		std::cout << ' ' << myvector[i];
 }
@@ -421,7 +409,7 @@ void	ft_operator_brackets(void)
 		myvector[i]=temp;
 	}
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<sz; i++)
 		std::cout << ' ' << myvector[i];
 }
@@ -434,7 +422,7 @@ void	std_at(void)
 	for (unsigned i=0; i<myvector.size(); i++)
 		myvector.at(i)=i;
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<myvector.size(); i++)
 		std::cout << ' ' << myvector.at(i);
 }
@@ -447,7 +435,7 @@ void	ft_at(void)
 	for (unsigned i=0; i<myvector.size(); i++)
 		myvector.at(i)=i;
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<myvector.size(); i++)
 		std::cout << ' ' << myvector.at(i);
 }
@@ -491,7 +479,7 @@ void	std_back(void)
 		myvector.push_back ( myvector.back() -1 );
 	}
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<myvector.size() ; i++)
 		std::cout << ' ' << myvector[i];
 }
@@ -507,7 +495,7 @@ void	ft_back(void)
 		myvector.push_back ( myvector.back() -1 );
 	}
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<myvector.size() ; i++)
 		std::cout << ' ' << myvector[i];
 }
@@ -528,7 +516,7 @@ void	std_assign(void)
 	int myints[] = {1776,7,4};
 	third.assign (myints,myints+3);   // assigning from array.
 
-	std::cout << "Size: " << int (first.size()) << ", " << int (second.size()) << ", " << int (third.size());
+	std::cout << "Size:\n" << int (first.size()) << ", " << int (second.size()) << ", " << int (third.size());
 }
 
 void	ft_assign(void)
@@ -547,7 +535,7 @@ void	ft_assign(void)
 	int myints[] = {1776,7,4};
 	third.assign (myints,myints+3);   // assigning from array.
 
-	std::cout << "Size: " << int (first.size()) << ", " << int (second.size()) << ", " << int (third.size());
+	std::cout << "Size:\n" << int (first.size()) << ", " << int (second.size()) << ", " << int (third.size());
 }
 
 void	std_push_back(void)
@@ -623,7 +611,7 @@ void	std_insert(void)
 	int myarray [] = { 501,502,503 };
 	myvector.insert (myvector.begin(), myarray, myarray+3);
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (it=myvector.begin(); it<myvector.end(); it++)
 		std::cout << ' ' << *it;
 }
@@ -647,7 +635,7 @@ void	ft_insert(void)
 	int myarray [] = { 501,502,503 };
 	myvector.insert (myvector.begin(), myarray, myarray+3);
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (it=myvector.begin(); it<myvector.end(); it++)
 		std::cout << ' ' << *it;
 }
@@ -665,7 +653,7 @@ void	std_erase(void)
 	// erase the first 3 elements:
 	myvector.erase (myvector.begin(),myvector.begin()+3);
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<myvector.size(); ++i)
 		std::cout << ' ' << myvector[i];
 }
@@ -683,7 +671,7 @@ void	ft_erase(void)
 	// erase the first 3 elements:
 	myvector.erase (myvector.begin(),myvector.begin()+3);
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<myvector.size(); ++i)
 		std::cout << ' ' << myvector[i];
 }
@@ -695,7 +683,7 @@ void	std_swap(void)
 
 	foo.swap(bar);
 
-	std::cout << "foo and bar contain:";
+	std::cout << "foo and bar contain:\n";
 	for (unsigned i=0; i<foo.size(); i++)
 		std::cout << ' ' << foo[i];
 
@@ -710,7 +698,7 @@ void	ft_swap(void)
 
 	foo.swap(bar);
 
-	std::cout << "foo and bar contain:";
+	std::cout << "foo and bar contain:\n";
 	for (unsigned i=0; i<foo.size(); i++)
 		std::cout << ' ' << foo[i];
 
@@ -725,7 +713,7 @@ void	std_clear(void)
 	myvector.push_back (200);
 	myvector.push_back (300);
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<myvector.size(); i++)
 		std::cout << ' ' << myvector[i];
 
@@ -744,7 +732,7 @@ void	ft_clear(void)
 	myvector.push_back (200);
 	myvector.push_back (300);
 
-	std::cout << "myvector contains:";
+	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<myvector.size(); i++)
 		std::cout << ' ' << myvector[i];
 
@@ -768,7 +756,7 @@ void	std_get_allocator(void)
 	// construct values in-place on the array:
 	for (i=0; i<5; i++) myvector.get_allocator().construct(&p[i],i);
 
-	std::cout << "The allocated array contains:";
+	std::cout << "The allocated array contains:\n";
 	for (i=0; i<5; i++) std::cout << ' ' << p[i];
 
 	// destroy and deallocate:
@@ -788,7 +776,7 @@ void	ft_get_allocator(void)
 	// construct values in-place on the array:
 	for (i=0; i<5; i++) myvector.get_allocator().construct(&p[i],i);
 
-	std::cout << "The allocated array contains:";
+	std::cout << "The allocated array contains:\n";
 	for (i=0; i<5; i++) std::cout << ' ' << p[i];
 
 	// destroy and deallocate:
@@ -829,7 +817,7 @@ void	std_swapv(void)
 
 	foo.swap(bar);
 
-	std::cout << "foo and bar contain:";
+	std::cout << "foo and bar contain:\n";
 	for (std::vector<int>::iterator it = foo.begin(); it!=foo.end(); ++it)
 		std::cout << ' ' << *it;
 
@@ -844,7 +832,7 @@ void	ft_swapv(void)
 
 	foo.swap(bar);
 
-	std::cout << "foo and bar contain:";
+	std::cout << "foo and bar contain:\n";
 	for (ft::vector<int>::iterator it = foo.begin(); it!=foo.end(); ++it)
 		std::cout << ' ' << *it;
 
@@ -852,62 +840,33 @@ void	ft_swapv(void)
 		std::cout << ' ' << *it;
 }
 
-void	caller(void (*f1)(void), void (*f2)(void), std::string title)
-{
-	std::cout << std::endl;
-	decorator(title);
-
-	std::cout << "\x1B[36mft:\033[0m\t";
-	//std::chrono::steady_clock::time_point b1 = std::chrono::high_resolution_clock::now();
-	f1();
-	//std::chrono::steady_clock::time_point e1 = std::chrono::high_resolution_clock::now();
-	//std::cout << " (" << std::chrono::duration_cast<std::chrono::microseconds>(e1 - b1).count() << " microseconds)" << std::endl;
-
-	std::cout << "\x1B[33mstd:\033[0m\t";
-	//std::chrono::steady_clock::time_point b2 = std::chrono::high_resolution_clock::now();
-	f2();
-	//std::chrono::steady_clock::time_point e2 = std::chrono::high_resolution_clock::now();
-	//std::cout << " (" << std::chrono::duration_cast<std::chrono::microseconds>(e2 - b2).count() << " microseconds)" << std::endl;
-
-	std::cout << std::endl;
-}
-
-void	test_start(void)
-{
-	caller(ft_constructor, std_constructor, "constructor");
-	caller(ft_operator_equal, std_operator_equal, "operator=");
-	caller(ft_begin, std_begin, "begin");
-	caller(ft_end, std_end, "end");
-	caller(ft_rbegin, std_rbegin, "rbegin");
-	caller(ft_rend, std_rend, "rend");
-	caller(ft_size, std_size, "size");
-	caller(ft_max_size, std_max_size, "max_size");
-	caller(ft_resize, std_resize, "resize");
-	caller(ft_capacity, std_capacity, "capacity");
-	caller(ft_empty, std_empty, "empty");
-	caller(ft_reserve, std_reserve, "reserve");
-	caller(ft_operator_brackets, std_operator_brackets, "operator[]");
-	caller(ft_at, std_at, "at");
-	caller(ft_front, std_front, "front");
-	caller(ft_back, std_back, "back");
-	caller(ft_assign, std_assign, "assign");
-	caller(ft_push_back, std_push_back, "push_back");
-	caller(ft_pop_back, std_pop_back, "pop_back");
-	caller(ft_insert, std_insert, "insert");
-	caller(ft_erase, std_erase, "erase");
-	caller(ft_swap, std_swap, "swap");
-	caller(ft_clear, std_clear, "clear");
-	caller(ft_get_allocator, std_get_allocator, "get_allocator");
-	caller(ft_relational_operators, std_relational_operators, "operators");
-	caller(ft_swapv, std_swapv, "swap (vector)");
-}
-
 int	main(void)
 {
-	std::cout << "##############################" << std::endl;
-	decorator("VECTOR");
-	std::cout << "##############################" << std::endl;
-	test_start();
-
+	test_it(ft_constructor, std_constructor, "constructor");
+	test_it(ft_operator_equal, std_operator_equal, "operator=");
+	test_it(ft_begin, std_begin, "begin");
+	test_it(ft_end, std_end, "end");
+	test_it(ft_rbegin, std_rbegin, "rbegin");
+	test_it(ft_rend, std_rend, "rend");
+	test_it(ft_size, std_size, "size");
+	test_it(ft_max_size, std_max_size, "max_size");
+	test_it(ft_resize, std_resize, "resize");
+	test_it(ft_capacity, std_capacity, "capacity");
+	test_it(ft_empty, std_empty, "empty");
+	test_it(ft_reserve, std_reserve, "reserve");
+	test_it(ft_operator_brackets, std_operator_brackets, "operator[]");
+	test_it(ft_at, std_at, "at");
+	test_it(ft_front, std_front, "front");
+	test_it(ft_back, std_back, "back");
+	test_it(ft_assign, std_assign, "assign");
+	test_it(ft_push_back, std_push_back, "push_back");
+	test_it(ft_pop_back, std_pop_back, "pop_back");
+	test_it(ft_insert, std_insert, "insert");
+	test_it(ft_erase, std_erase, "erase");
+	test_it(ft_swap, std_swap, "swap");
+	test_it(ft_clear, std_clear, "clear");
+	test_it(ft_get_allocator, std_get_allocator, "get_allocator");
+	test_it(ft_relational_operators, std_relational_operators, "operators");
+	test_it(ft_swapv, std_swapv, "swap (vector)");
 	return (0);
 }
