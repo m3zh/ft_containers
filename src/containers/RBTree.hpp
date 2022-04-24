@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 10:47:47 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/04/24 18:36:31 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/04/24 20:17:43 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ class RBTree
         typedef typename allocator_type::const_pointer			            const_pointer;
         typedef typename allocator_type::reference				            reference;
         typedef typename allocator_type::const_reference		            const_reference;
-        typedef treeIterator< T >									        iterator;
-        typedef treeIterator< const T >								        const_iterator;
+        typedef typename treeIterator< T >::iterator				        iterator;
+        typedef typename treeIterator< const T >::const_iterator	        const_iterator;
         typedef ft::reverse_iterator< iterator >				            reverse_iterator;
         typedef ft::reverse_iterator< const_iterator >			            const_reverse_iterator;
         typedef std::size_t										            size_type;
@@ -268,7 +268,7 @@ class RBTree
         }
         const_iterator			begin( void ) const
         {
-            if (_root == NIL)        return treeIterator< const T>(nullptr);
+            if (_root == NIL)        return treeIterator< const T >(nullptr);
             treeNode* first = _root;
             while (first->left != NIL) first = first->left;
             return iterator(first);
@@ -483,7 +483,7 @@ class RBTree
         treeNode    *get_root()    const                         {           return _root;      };
         treeNode    *get_end()     const                         {           return NIL;        };
 
-        iterator lower_bound (const value_type& value)
+        iterator lower_bound (const value_type& value) const
         {
             treeNode*	node = _root;
             treeNode*	lower = nullptr;
@@ -496,9 +496,9 @@ class RBTree
             return lower;
         };
 
-        const_iterator lower_bound (const value_type& value) const  {   return lower_bound(value);  }
+        // const_iterator lower_bound (const value_type& value) const  {   return const_iterator(lower_bound(value));  }
 
-        iterator upper_bound (const value_type& value)
+        iterator upper_bound (const value_type& value) const
         {
             treeNode*	node = _root;
             treeNode*	upper = nullptr;
@@ -511,7 +511,7 @@ class RBTree
             return upper;
         };
 
-        const_iterator upper_bound (const value_type& value) const  {   return upper_bound(value);  }
+        // const_iterator upper_bound (const value_type& value) const  {   return const_iterator(upper_bound(value));  }
 };
 
 #endif
