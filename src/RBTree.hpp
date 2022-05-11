@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 10:47:47 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/04/24 18:36:31 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/09 21:36:11 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "type_traits.hpp"
 # include "iterator.hpp"
 # include "RBTree_iterator.hpp"
+# include "algorithm.hpp"
 # include "pair.hpp"
 
 template < class T, class Compare = std::less< T >, class Alloc = std::allocator<T> >
@@ -53,43 +54,30 @@ class RBTree
 
     public:
         // CONSTRUCTORS
-        explicit RBTree( const value_compare &comp, const allocator_type &alloc) :  NIL(nilNode()),
-                                                                                    _height(0),
-                                                                                    _comp(comp),
-                                                                                    _alloc(alloc)    {     NIL->color = BLACK; _root = NIL;       };
+        explicit RBTree( const value_compare &comp,
+                         const allocator_type &alloc )  :   NIL(nilNode()),
+                                                            _height(0),
+                                                            _comp(comp),
+                                                            _alloc(alloc)           {     NIL->color = BLACK; _root = NIL;       };
 
-        RBTree( RBTree const &t ) : NIL(newNode(t.NIL->value, t.NIL->parent, t.NIL->leaf)),
-                                    _root(copytree(t._root, t.NIL)),                                    
-                                    _height(t._height),
+        RBTree( RBTree const &t ) : NIL(nilNode()),
+                                    _root(NIL),                                    
                                     _comp(t._comp),
-                                    _alloc(t._alloc)    {};
+                                    _alloc(t._alloc)                                {       insert(t.begin(), t.end());          };
 
         RBTree& operator = ( const RBTree &t )
         {
             if ( this != &t )
             {
                 clear(_root);
-                _root = copytree(t.get_root(), NIL);
+                insert(t.begin(), t.end());
                 _comp = t._comp;
                 _alloc = t._alloc;
             }
             return *this;
         };
 
-        ~RBTree( void ) {   clear(_root); delnilNode(NIL); };
-
-
-        treeNode    *copytree(treeNode *src, treeNode *parent)
-        {
-        	if (src && src->leaf)
-            {
-                treeNode* leaf = newNode(src->value, parent, src->leaf);
-                leaf->left = copytree(src->left, leaf);
-                leaf->right = copytree(src->right, leaf);
-                return leaf;
-            }
-            return nullptr;
-        }
+        ~RBTree( void )                                                             {       clear(_root); delnilNode(NIL);      };
 
         // [INSERT] ( + newNode() )
         treeNode                    *nilNode( void )
@@ -97,7 +85,7 @@ class RBTree
             treeNode    *nilnode = _node_alloc.allocate(1);
             nilnode->left  = NIL;
             nilnode->right = NIL;
-            nilnode->parent = nullptr;
+            nilnode->parent = 0;
             nilnode->color = BLACK;
             nilnode->leaf = 0;
 			return nilnode;
@@ -142,17 +130,17 @@ class RBTree
             return ft::make_pair(iterator(curr), true);
         };
 
-        iterator 				insert(iterator position, const value_type& value)      {       return insert(value).first; (void)position;         }
+        iterator 				insert(iterator position, const value_type& value)      {       return insert(value).first; (void)position;                     };
 		
         template <class InputIterator>
-	    void					insert(InputIterator first, InputIterator last)     {    while (first != last)   { insert(*first); first++; }           }; 
+	    void					insert(InputIterator first, InputIterator last)         {       while (first != last)   { insert(*first); first++; }            }; 
 
         // [ERASE] ( + delNode() )
-
         size_type 				erase(value_type const &val)
         {
             	treeNode	*to_del = search(_root, val);
-		        if (!to_del)	return 0;
+		        if (!to_del)
+                    return 0;
 		        erase(to_del);
 		        return 1;
         }
@@ -193,7 +181,7 @@ class RBTree
                     rebalanceTree4erase(to_fix);
                 delNode(node);
         };
-		void 					erase(iterator first, iterator last)                    {	while (first != last)   {    erase(*first++); }	        };
+		void 					erase(iterator first, iterator last)                    {       while (first != last)   erase(*first++);	        };
 
         // [FIND] + search
 
@@ -205,7 +193,7 @@ class RBTree
                 else if (_comp(to_find->value, val))         	to_find = to_find->right;
                 else					                        return to_find;
             }
-            return nullptr;
+            return 0;
         }
 
         iterator    find(const value_type& val) const
@@ -213,19 +201,23 @@ class RBTree
             treeNode*	node = search(_root, val);
             if (node)
                 return iterator(node);
-            return iterator(nullptr);
+            return iterator(max(_root));
         }
 
         // CLEAR
-        void        delNode(treeNode *node)        {              
+        void        delNode(treeNode *node)
+        {              
             _alloc.destroy(&(node->value));  
             _node_alloc.deallocate(node, 1); 
-            _height--; }
+            _height--;
+        }
 
-        void        delnilNode(treeNode *node)        {              
+        void        delnilNode(treeNode *node)
+        {              
             _node_alloc.deallocate(node, 1); 
             _height--; 
         }
+
         // clear the tree in postorder trasversal (left, right, root)
         void        clear(treeNode *root)
         {
@@ -239,46 +231,31 @@ class RBTree
         }
         
         // capacity
-        bool        empty( void ) const      {   return _height == 0;                     };
-        size_type   size( void )  const      {   return _height;                          };
-	    size_type	max_size() const	     {   return _node_alloc.max_size();           };
-
-        // exceptions
-		class EmptyTree : public std::exception {
-			public:
-				virtual const char* what() const throw() {
-					return ( "Tree is empty" );
-				}
-		};
-
-        class KeyNotFound : public std::exception {
-			public:
-				virtual const char* what() const throw() {
-					return ( "Key not found" );
-				}
-		};
+        bool        empty( void ) const             {       return _height == 0;                     };
+        size_type   size( void )  const             {       return _height;                          };
+	    size_type	max_size() const	            {       return _node_alloc.max_size();           };
 
         // iterators
         iterator				begin( void )
         {
-            if (_root == NIL)        return iterator(nullptr);
+            if (_root == NIL)		return iterator(NIL);
             treeNode* first = _root;
-            while (first->left != NIL) { first = first->left; }
+            while (first && first->left != NIL) { first = first->left; }
             return iterator(first);
         }
         const_iterator			begin( void ) const
         {
-            if (_root == NIL)        return treeIterator< const T>(nullptr);
+            if (_root == NIL || !_root)  return iterator(NIL);
             treeNode* first = _root;
-            while (first->left != NIL) first = first->left;
+            while (first && first->left != NIL) first = first->left;
             return iterator(first);
         }
-        iterator				end()				{       return iterator(max(_root));                         }
-        const_iterator			end() const			{       return iterator(max(_root));                   }
+        iterator				end()				{       return iterator(max(_root));                    }
+        const_iterator			end() const			{       return iterator(max(_root));                    }
         reverse_iterator		rbegin()			{       return reverse_iterator(end());                 }
-        const_reverse_iterator	rbegin() const		{       return const_reverse_iterator(end());           }
+        const_reverse_iterator	rbegin() const		{       return reverse_iterator(end());                 }
         reverse_iterator		rend()				{       return reverse_iterator(begin());               }
-        const_reverse_iterator	rend() const		{       return const_reverse_iterator(begin());         }
+        const_reverse_iterator	rend() const		{       return reverse_iterator(begin());               }
 
         void	swap( RBTree &t ) {
 			ft::swap(NIL, t.NIL);
@@ -290,10 +267,10 @@ class RBTree
 		}
 
         // min, max
+        treeNode    *min(treeNode* node) const      {       while (node->left != NIL)       {   node = node->left;      }    return node;        };
+        treeNode    *max(treeNode* node) const      {       while (node && node->leaf)      {   node = node->right;     }    return node;        };
 
-        treeNode    *min(treeNode* node) const      {       while (node->left != NIL)       {       node = node->left;  }    return node;         };
-        treeNode    *max(treeNode* node) const      {       while (node != NIL)             {       node = node->right; }    return node;        };
-
+        // debugging
         void inorder(treeNode* root)
         {
             if (root != NIL)
@@ -349,7 +326,7 @@ class RBTree
 
         treeNode	*replaceNode(treeNode *node)
             {
-                if (!node || (!node->left && !node->right))         return nullptr;
+                if (!node || (!node->left && !node->right))         return 0;
                 if (node->left && node->right)  			return successor(node->right);
             if (node->right)  return node->left;
                 return node->right;
@@ -483,35 +460,35 @@ class RBTree
         treeNode    *get_root()    const                         {           return _root;      };
         treeNode    *get_end()     const                         {           return NIL;        };
 
-        iterator lower_bound (const value_type& value)
+        treeNode* lower_bound (const value_type& value) const
         {
             treeNode*	node = _root;
-            treeNode*	lower = nullptr;
+            treeNode*	lower = NIL;
         
             while (node != NIL)
             {
-                if (!_comp(value, node->value))   {    return node ;   }  // if inferior
-                else                                node = node->right;
+                if (!_comp(node->value, value))
+                    {       lower = node; node = node->left;        }
+                else         node = node->right;
             }
             return lower;
         };
 
-        const_iterator lower_bound (const value_type& value) const  {   return lower_bound(value);  }
-
-        iterator upper_bound (const value_type& value)
+        treeNode* upper_bound (const value_type& value) const
         {
             treeNode*	node = _root;
-            treeNode*	upper = nullptr;
+            treeNode*	upper = NIL;
         
             while (node != NIL)
             {
-                if (_comp(node->value, value))   node = node->right;
-                else                             {       upper = node->right; node = node->left;   }
+                if (_comp(value, node->value))
+                    {       upper = node; node = node->left;        }
+                else        node = node->right;
             }
             return upper;
         };
 
-        const_iterator upper_bound (const value_type& value) const  {   return upper_bound(value);  }
+        allocator_type	get_allocator( void ) const					{	return _alloc;	        };
 };
 
 #endif

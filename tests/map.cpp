@@ -13,7 +13,7 @@
 # include <map>
 # include <iostream>
 
-# include "../src/containers/map.hpp"
+# include "../src/map.hpp"
 # include "utils.cpp"
 
 bool fncomp (char lhs, char rhs) {return lhs<rhs;}

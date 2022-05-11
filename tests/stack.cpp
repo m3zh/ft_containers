@@ -6,14 +6,14 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 11:22:01 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/04/24 17:12:22 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/11 13:19:13 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include <stack>
 # include <iostream>
 
-# include "../src/containers/stack.hpp"
+# include "../src/stack.hpp"
 # include "utils.cpp"
 
 void	std_constructor(void)
@@ -26,6 +26,7 @@ void	std_constructor(void)
 	std::stack<int,std::vector<int> > third (myvector);
 
 	std::cout << "sizes: " << first.size() << ", " << second.size() << ", " << third.size();
+	std::cout << std::endl;
 }
 
 void	ft_constructor(void)
@@ -38,6 +39,7 @@ void	ft_constructor(void)
 	ft::stack<int,ft::vector<int> > third (myvector);
 
 	std::cout << "sizes: " << first.size() << ", " << second.size() << ", " << third.size();
+	std::cout << std::endl;
 }
 
 void	std_empty(void)
@@ -54,6 +56,7 @@ void	std_empty(void)
 	}
 
 	std::cout << "total: " << sum;
+	std::cout << std::endl;
 }
 
 void	ft_empty(void)
@@ -70,6 +73,7 @@ void	ft_empty(void)
 	}
 
 	std::cout << "total: " << sum;
+	std::cout << std::endl;
 }
 
 void	std_size(void)
@@ -82,6 +86,7 @@ void	std_size(void)
 
 	myints.pop();
 	std::cout << ", " << myints.size();
+	std::cout << std::endl;
 }
 
 void	ft_size(void)
@@ -94,6 +99,7 @@ void	ft_size(void)
 
 	myints.pop();
 	std::cout << ", " << myints.size();
+	std::cout << std::endl;
 }
 
 void	std_top(void)
@@ -106,6 +112,7 @@ void	std_top(void)
 	mystack.top() -= 5;
 
 	std::cout << "mystack.top() is now " << mystack.top();
+	std::cout << std::endl;
 }
 
 void	ft_top(void)
@@ -118,6 +125,7 @@ void	ft_top(void)
 	mystack.top() -= 5;
 
 	std::cout << "mystack.top() is now " << mystack.top();
+	std::cout << std::endl;
 }
 
 void	std_push(void)
@@ -132,6 +140,7 @@ void	std_push(void)
 		std::cout << ' ' << mystack.top();
 		mystack.pop();
 	}
+	std::cout << std::endl;
 }
 
 void	ft_push(void)
@@ -146,6 +155,7 @@ void	ft_push(void)
 		std::cout << ' ' << mystack.top();
 		mystack.pop();
 	}
+	std::cout << std::endl;
 }
 
 void	std_pop(void)
@@ -160,6 +170,7 @@ void	std_pop(void)
 		std::cout << ' ' << mystack.top();
 		mystack.pop();
 	}
+	std::cout << std::endl;
 }
 
 void	ft_pop(void)
@@ -174,6 +185,7 @@ void	ft_pop(void)
 		std::cout << ' ' << mystack.top();
 		mystack.pop();
 	}
+	std::cout << std::endl;
 }
 
 void	std_relational_operators(void)
@@ -188,6 +200,7 @@ void	std_relational_operators(void)
 	if (foo> bar) std::cout << "4";
 	if (foo<=bar) std::cout << "5";
 	if (foo>=bar) std::cout << "6";
+	std::cout << std::endl;
 }
 
 void	ft_relational_operators(void)
@@ -202,6 +215,7 @@ void	ft_relational_operators(void)
 	if (foo> bar) std::cout << "4";
 	if (foo<=bar) std::cout << "5";
 	if (foo>=bar) std::cout << "6";
+	std::cout << std::endl;
 }
 
 void	std_swaps(void)
@@ -210,9 +224,10 @@ void	std_swaps(void)
 	foo.push (10); foo.push(20); foo.push(30);
 	bar.push (111); bar.push(222);
 
-	swap(foo,bar);
+	std::swap(foo,bar);
 
 	std::cout << "size of foo and bar: " << foo.size() << ", " << bar.size();
+	std::cout << std::endl;
 }
 
 void	ft_swaps(void)
@@ -221,8 +236,9 @@ void	ft_swaps(void)
 	foo.push (10); foo.push(20); foo.push(30);
 	bar.push (111); bar.push(222);
 
-	swap(foo,bar);
+	ft::swap(foo,bar);
 	std::cout << "size of foo and bar: " << foo.size() << ", " << bar.size();
+	std::cout << std::endl;
 }
 
 int	main(void)
@@ -236,6 +252,5 @@ int	main(void)
 	test_it(ft_pop, std_pop, "pop");
 	test_it(ft_relational_operators, std_relational_operators, "operators");
 	test_it(ft_swaps, std_swaps, "swap (stack)");
-
 	return (0);
 }

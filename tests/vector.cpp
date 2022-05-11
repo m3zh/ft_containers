@@ -6,16 +6,15 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 11:22:01 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/04/24 17:12:18 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/11 13:27:21 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include	<vector>
 # include	<iostream>
-# include	<chrono>
 
-# include	"../src/containers/vector.hpp"
-# include	"../src/containers/iterator.hpp"
+# include	"../src/vector.hpp"
+# include	"../src/iterator.hpp"
 # include   "utils.cpp"
 
 void	std_constructor(void)
@@ -32,6 +31,7 @@ void	std_constructor(void)
 	std::cout << "The contents of fifth are:\n";
 	for (std::vector<int>::iterator it = fifth.begin(); it != fifth.end(); ++it)
 		std::cout << ' ' << *it;
+	std::cout << std::endl;
 }
 
 void	ft_constructor(void)
@@ -48,6 +48,7 @@ void	ft_constructor(void)
 	std::cout << "The contents of fifth are:\n";
 	for (ft::vector<int>::iterator it = fifth.begin(); it != fifth.end(); ++it)
 		std::cout << ' ' << *it;
+	std::cout << std::endl;
 }
 
 void	std_operator_equal(void)
@@ -59,6 +60,7 @@ void	std_operator_equal(void)
 	foo = std::vector<int>();
 
 	std::cout << "Size of foo and bar:\n" << int(foo.size()) << " and " << int(bar.size());
+	std::cout << std::endl;
 }
 
 void	ft_operator_equal(void)
@@ -70,6 +72,7 @@ void	ft_operator_equal(void)
 	foo = ft::vector<int>();
 
 	std::cout << "Size of foo and bar:\n" << int(foo.size()) << " and " << int(bar.size());
+	std::cout << std::endl;
 }
 
 void	std_begin(void)
@@ -80,6 +83,7 @@ void	std_begin(void)
 	std::cout << "myvector contains:\n";
 	for (std::vector<int>::iterator it = myvector.begin() ; it != myvector.end(); ++it)
 		std::cout << ' ' << *it;
+	std::cout << std::endl;
 }
 
 void	ft_begin(void)
@@ -90,6 +94,7 @@ void	ft_begin(void)
 	std::cout << "myvector contains:\n";
 	for (ft::vector<int>::iterator it = myvector.begin() ; it != myvector.end(); ++it)
 		std::cout << ' ' << *it;
+	std::cout << std::endl;
 }
 
 void	std_end(void)
@@ -100,6 +105,7 @@ void	std_end(void)
 	std::cout << "myvector contains:\n";
 	for (std::vector<int>::iterator it = myvector.begin() ; it != myvector.end(); ++it)
 		std::cout << ' ' << *it;
+	std::cout << std::endl;
 }
 
 void	ft_end(void)
@@ -110,6 +116,7 @@ void	ft_end(void)
 	std::cout << "myvector contains:\n";
 	for (ft::vector<int>::iterator it = myvector.begin() ; it != myvector.end(); ++it)
 		std::cout << ' ' << *it;
+	std::cout << std::endl;
 }
 
 void	std_rbegin(void)
@@ -125,6 +132,7 @@ void	std_rbegin(void)
 	std::cout << "myvector contains:\n";
 	for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
 		std::cout << ' ' << *it;
+	std::cout << std::endl;
 }
 
 void	ft_rbegin(void)
@@ -140,6 +148,7 @@ void	ft_rbegin(void)
 	std::cout << "myvector contains:\n";
 	for (ft::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
 		std::cout << ' ' << *it;
+	std::cout << std::endl;
 }
 
 void	std_rend(void)
@@ -155,6 +164,7 @@ void	std_rend(void)
 	std::cout << "myvector contains:\n";
 	for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
 		std::cout << ' ' << *it;
+	std::cout << std::endl;
 }
 
 void	ft_rend(void)
@@ -170,6 +180,7 @@ void	ft_rend(void)
 	std::cout << "myvector contains:\n";
 	for (ft::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it)
 		std::cout << ' ' << *it;
+	std::cout << std::endl;
 }
 
 void	std_size(void)
@@ -185,6 +196,7 @@ void	std_size(void)
 
 	myints.pop_back();
 	std::cout << ", " << myints.size();
+	std::cout << std::endl;
 }
 
 void	ft_size(void)
@@ -200,6 +212,7 @@ void	ft_size(void)
 
 	myints.pop_back();
 	std::cout << ", " << myints.size();
+	std::cout << std::endl;
 }
 
 void	std_max_size(void)
@@ -212,6 +225,7 @@ void	std_max_size(void)
 	std::cout << "size, capacity and max_size:\n" << myvector.size();
 	std::cout << ", " << myvector.capacity();
 	std::cout << " and " << myvector.max_size();
+	std::cout << std::endl;
 }
 
 void	ft_max_size(void)
@@ -224,6 +238,7 @@ void	ft_max_size(void)
 	std::cout << "size, capacity and max_size:\n" << myvector.size();
 	std::cout << ", " << myvector.capacity();
 	std::cout << " and " << myvector.max_size();
+	std::cout << std::endl;
 }
 
 void	std_resize(void)
@@ -240,6 +255,7 @@ void	std_resize(void)
 	std::cout << "myvector contains:\n";
 	for (size_t i=0;i<myvector.size();i++)
 		std::cout << ' ' << myvector[i];
+	std::cout << std::endl;
 }
 
 void	ft_resize(void)
@@ -256,6 +272,7 @@ void	ft_resize(void)
 	std::cout << "myvector contains:\n";
 	for (size_t i=0;i<myvector.size();i++)
 		std::cout << ' ' << myvector[i];
+	std::cout << std::endl;
 }
 
 void	std_capacity(void)
@@ -268,6 +285,7 @@ void	std_capacity(void)
 	std::cout << "size, capacity and max_size:\n" << myvector.size();
 	std::cout << ", " << myvector.capacity();
 	std::cout << " and " << myvector.max_size();
+	std::cout << std::endl;
 }
 
 void	ft_capacity(void)
@@ -280,6 +298,7 @@ void	ft_capacity(void)
 	std::cout << "size, capacity and max_size:\n" << myvector.size();
 	std::cout << ", " << myvector.capacity();
 	std::cout << " and " << myvector.max_size();
+	std::cout << std::endl;
 }
 
 void	std_empty(void)
@@ -296,6 +315,7 @@ void	std_empty(void)
 	}
 
 	std::cout << "total:\n" << sum;
+	std::cout << std::endl;
 }
 
 void	ft_empty(void)
@@ -312,6 +332,7 @@ void	ft_empty(void)
 	}
 
 	std::cout << "total:\n" << sum;
+	std::cout << std::endl;
 }
 
 void	std_reserve(void)
@@ -339,6 +360,7 @@ void	std_reserve(void)
 			std::cout << sz << ", ";
 		}
 	}
+	std::cout << std::endl;
 }
 
 void	ft_reserve(void)
@@ -366,6 +388,7 @@ void	ft_reserve(void)
 			std::cout << sz << ", ";
 		}
 	}
+	std::cout << std::endl;
 }
 
 void	std_operator_brackets(void)
@@ -389,6 +412,7 @@ void	std_operator_brackets(void)
 	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<sz; i++)
 		std::cout << ' ' << myvector[i];
+	std::cout << std::endl;
 }
 
 void	ft_operator_brackets(void)
@@ -412,6 +436,7 @@ void	ft_operator_brackets(void)
 	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<sz; i++)
 		std::cout << ' ' << myvector[i];
+	std::cout << std::endl;
 }
 
 void	std_at(void)
@@ -425,6 +450,7 @@ void	std_at(void)
 	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<myvector.size(); i++)
 		std::cout << ' ' << myvector.at(i);
+	std::cout << std::endl;
 }
 
 void	ft_at(void)
@@ -438,6 +464,7 @@ void	ft_at(void)
 	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<myvector.size(); i++)
 		std::cout << ' ' << myvector.at(i);
+	std::cout << std::endl;
 }
 
 void	std_front(void)
@@ -452,6 +479,7 @@ void	std_front(void)
 	myvector.front() -= myvector.back();
 
 	std::cout << "myvector.front() is now " << myvector.front();
+	std::cout << std::endl;
 }
 
 void	ft_front(void)
@@ -466,6 +494,7 @@ void	ft_front(void)
 	myvector.front() -= myvector.back();
 
 	std::cout << "myvector.front() is now " << myvector.front();
+	std::cout << std::endl;
 }
 
 void	std_back(void)
@@ -482,6 +511,7 @@ void	std_back(void)
 	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<myvector.size() ; i++)
 		std::cout << ' ' << myvector[i];
+	std::cout << std::endl;
 }
 
 void	ft_back(void)
@@ -498,6 +528,7 @@ void	ft_back(void)
 	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<myvector.size() ; i++)
 		std::cout << ' ' << myvector[i];
+	std::cout << std::endl;
 }
 
 void	std_assign(void)
@@ -517,6 +548,7 @@ void	std_assign(void)
 	third.assign (myints,myints+3);   // assigning from array.
 
 	std::cout << "Size:\n" << int (first.size()) << ", " << int (second.size()) << ", " << int (third.size());
+	std::cout << std::endl;
 }
 
 void	ft_assign(void)
@@ -536,6 +568,7 @@ void	ft_assign(void)
 	third.assign (myints,myints+3);   // assigning from array.
 
 	std::cout << "Size:\n" << int (first.size()) << ", " << int (second.size()) << ", " << int (third.size());
+	std::cout << std::endl;
 }
 
 void	std_push_back(void)
@@ -545,7 +578,7 @@ void	std_push_back(void)
 	for (int i = 0; i < 100; i += 1)
 		myvector.push_back (i);
 
-	std::cout << "myvector stores " << int(myvector.size()) << " numbers.";
+	std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
 }
 
 void	ft_push_back(void)
@@ -555,7 +588,7 @@ void	ft_push_back(void)
 	for (int i = 0; i < 100; i += 1)
 		myvector.push_back (i);
 
-	std::cout << "myvector stores " << int(myvector.size()) << " numbers.";
+	std::cout << "myvector stores " << int(myvector.size()) << " numbers.\n";
 }
 
 void	std_pop_back(void)
@@ -573,6 +606,7 @@ void	std_pop_back(void)
 	}
 
 	std::cout << "The elements of myvector add up to " << sum;
+	std::cout << std::endl;
 }
 
 void	ft_pop_back(void)
@@ -590,6 +624,7 @@ void	ft_pop_back(void)
 	}
 
 	std::cout << "The elements of myvector add up to " << sum;
+	std::cout << std::endl;
 }
 
 void	std_insert(void)
@@ -614,6 +649,7 @@ void	std_insert(void)
 	std::cout << "myvector contains:\n";
 	for (it=myvector.begin(); it<myvector.end(); it++)
 		std::cout << ' ' << *it;
+	std::cout << std::endl;
 }
 
 void	ft_insert(void)
@@ -638,6 +674,7 @@ void	ft_insert(void)
 	std::cout << "myvector contains:\n";
 	for (it=myvector.begin(); it<myvector.end(); it++)
 		std::cout << ' ' << *it;
+	std::cout << std::endl;
 }
 
 void	std_erase(void)
@@ -656,6 +693,7 @@ void	std_erase(void)
 	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<myvector.size(); ++i)
 		std::cout << ' ' << myvector[i];
+	std::cout << std::endl;
 }
 
 void	ft_erase(void)
@@ -674,6 +712,7 @@ void	ft_erase(void)
 	std::cout << "myvector contains:\n";
 	for (unsigned i=0; i<myvector.size(); ++i)
 		std::cout << ' ' << myvector[i];
+	std::cout << std::endl;
 }
 
 void	std_swap(void)
@@ -689,6 +728,7 @@ void	std_swap(void)
 
 	for (unsigned i=0; i<bar.size(); i++)
 		std::cout << ' ' << bar[i];
+	std::cout << std::endl;
 }
 
 void	ft_swap(void)
@@ -704,6 +744,7 @@ void	ft_swap(void)
 
 	for (unsigned i=0; i<bar.size(); i++)
 		std::cout << ' ' << bar[i];
+	std::cout << std::endl;
 }
 
 void	std_clear(void)
@@ -723,6 +764,7 @@ void	std_clear(void)
 
 	for (unsigned i=0; i<myvector.size(); i++)
 		std::cout << ' ' << myvector[i];
+	std::cout << std::endl;
 }
 
 void	ft_clear(void)
@@ -742,6 +784,7 @@ void	ft_clear(void)
 
 	for (unsigned i=0; i<myvector.size(); i++)
 		std::cout << ' ' << myvector[i];
+	std::cout << std::endl;
 }
 
 void	std_get_allocator(void)
@@ -762,6 +805,7 @@ void	std_get_allocator(void)
 	// destroy and deallocate:
 	for (i=0; i<5; i++) myvector.get_allocator().destroy(&p[i]);
 	myvector.get_allocator().deallocate(p,5);
+	std::cout << std::endl;
 }
 
 void	ft_get_allocator(void)
@@ -782,6 +826,7 @@ void	ft_get_allocator(void)
 	// destroy and deallocate:
 	for (i=0; i<5; i++) myvector.get_allocator().destroy(&p[i]);
 	myvector.get_allocator().deallocate(p,5);
+	std::cout << std::endl;
 }
 
 void	std_relational_operators(void)
@@ -795,6 +840,7 @@ void	std_relational_operators(void)
 	if (foo> bar) std::cout << "4";
 	if (foo<=bar) std::cout << "5";
 	if (foo>=bar) std::cout << "6";
+	std::cout << std::endl;
 }
 
 void	ft_relational_operators(void)
@@ -808,6 +854,7 @@ void	ft_relational_operators(void)
 	if (foo> bar) std::cout << "4";
 	if (foo<=bar) std::cout << "5";
 	if (foo>=bar) std::cout << "6";
+	std::cout << std::endl;
 }
 
 void	std_swapv(void)
@@ -823,6 +870,7 @@ void	std_swapv(void)
 
 	for (std::vector<int>::iterator it = bar.begin(); it!=bar.end(); ++it)
 		std::cout << ' ' << *it;
+	std::cout << std::endl;
 }
 
 void	ft_swapv(void)
@@ -838,6 +886,7 @@ void	ft_swapv(void)
 
 	for (ft::vector<int>::iterator it = bar.begin(); it!=bar.end(); ++it)
 		std::cout << ' ' << *it;
+	std::cout << std::endl;
 }
 
 int	main(void)

@@ -6,12 +6,13 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 08:57:16 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/04/24 16:57:51 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/11 13:14:28 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include <iostream>
 # include <iomanip>
+# include <sys/time.h>
 
 void	header(std::string title)
 {
@@ -27,22 +28,34 @@ void	header(std::string title)
     std::cout << "\n---------------------------\n";
 }
 
+void	print_timestamp(struct timeval start, struct timeval end)
+{
+	suseconds_t time_taken;
+  
+    time_taken = end.tv_usec - start.tv_usec;
+    // time_taken = (time_taken + (end.tv_usec - 
+    //                           start.tv_usec));
+
+	std::cout << "( " << std::fixed
+         << time_taken << std::setprecision(2);
+    std::cout << " microsec )" << std::endl;
+}
+
 void	test_it(void (*f1)(void), void (*f2)(void), std::string title)
 {
 	std::cout << std::endl;
 	header(title);
 
-	std::cout << "\x1B[36mFT:\033[0m\t\n";
-	std::chrono::steady_clock::time_point b1 = std::chrono::high_resolution_clock::now();
+	struct timeval start, end;
+    gettimeofday(&start, NULL);
 	f1();
-	std::chrono::steady_clock::time_point e1 = std::chrono::high_resolution_clock::now();
-	std::cout << "\n(" << std::chrono::duration_cast<std::chrono::microseconds>(e1 - b1).count() << " microseconds)" << std::endl;
+	gettimeofday(&end, NULL);
+	print_timestamp(start, end);
 
-	std::cout << "\x1B[33mSTD:\033[0m\t\n";
-	std::chrono::steady_clock::time_point b2 = std::chrono::high_resolution_clock::now();
+	gettimeofday(&start, NULL);
 	f2();
-	std::chrono::steady_clock::time_point e2 = std::chrono::high_resolution_clock::now();
-	std::cout << "\n(" << std::chrono::duration_cast<std::chrono::microseconds>(e2 - b2).count() << " microseconds)" << std::endl;
+	gettimeofday(&end, NULL);
+	print_timestamp(start, end);
 
 	std::cout << std::endl;
 }
