@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:03 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/11 14:22:04 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/12 23:41:39 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,10 @@
 
 namespace ft
 {
-	template <class T, class Allocator = std::allocator<T> >
+	template < class T, class Allocator = std::allocator<T> >
 	class vector
 	{
 		public:
-			template < class U >
-			class 												Iterator;
-
 			typedef	T											value_type;
 			typedef Allocator									allocator_type;
 
@@ -45,24 +42,33 @@ namespace ft
 			typedef size_t										size_type;
 			typedef typename iterator::difference_type			difference_type;
 
-			explicit	vector(const allocator_type& alloc = allocator_type()): _alloc(alloc), _capacity(0), _elem(NULL), _size(0) {}
-			explicit	vector(size_type n, const value_type& val = value_type(), const allocator_type& alloc = allocator_type()): _alloc(alloc), _capacity(0), _elem(NULL), _size(0) { insert(begin(), n, val); }
+			explicit	vector( const allocator_type& alloc = allocator_type() )	:	_alloc(alloc),
+																						_capacity(0),
+																						_elem(NULL),
+																						_size(0)		{};
+
+			explicit	vector( size_type n, const value_type& val = value_type(),
+								const allocator_type& alloc = allocator_type() )	:	_alloc(alloc),
+																						_capacity(0),
+																						_elem(NULL),
+																						_size(0)		{	insert(begin(), n, val);	};
 			template <class InputIterator>
-			vector(InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(), typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0): _alloc(alloc), _capacity(0), _elem(NULL), _size(0) { insert(begin(), first, last); }
+			vector( InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type(),
+					typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0 )	:	_alloc(alloc),
+																									_capacity(0),
+																									_elem(NULL),
+																									_size(0) 	{	insert(begin(), first, last);	};
 
-			vector(const vector& x): _alloc(x._alloc), _capacity(x._capacity), _elem(_alloc.allocate(x._capacity)), _size(x._size)
-			{
-				assign(x.begin(), x.end());
-			}
+			vector( const vector& x )	:	_alloc(x._alloc),
+											_capacity(x._capacity),
+											_elem(_alloc.allocate(x._capacity)),
+											_size(x._size)								{		assign(x.begin(), x.end());		};
 
-			~vector()
-			{
-				clear();
-				_alloc.deallocate(_elem, _capacity);
-			}
+			~vector()					{	clear();	_alloc.deallocate(_elem, _capacity);	};
 
 			template <class InputIterator>
-			void					assign(InputIterator first, InputIterator last, typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0)
+			void	assign( InputIterator first, InputIterator last,
+							typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0 )
 			{
 				size_type			n = ft::distance(first, last);
 
@@ -72,51 +78,45 @@ namespace ft
 				for (size_type i = 0; i < n; i += 1)
 					_alloc.construct(_elem + i, *first++);
 				_size = n;
-			}
+			};
 
-			void					assign(size_type n, const value_type& val)
+			void	assign( size_type n, const value_type& val )
 			{
 				clear();
-				if (n > _capacity)
-					reserve(n);
-				for (size_type i = 0; i < n; i += 1)
-					_alloc.construct(_elem + i, val);
+				if (n > _capacity)	reserve(n);
+				for (size_type i = 0; i < n; i += 1)	_alloc.construct(_elem + i, val);
 				_size = n;
-			}
+			};
 
 			reference				at(size_type n)
 			{
-				if (n < _size)
-					return (_elem[n]);
-				else
-					throw std::out_of_range("element out of range");
-			}
+				if (n < _size) return (_elem[n]);
+				throw std::out_of_range("element out of range");
+			};
 
 			const_reference			at(size_type n) const
 			{
-				if (n < _size)
-					return (_elem[n]);
-				else
-					throw std::out_of_range("element out of range");
-			}
+				if (n < _size)	return (_elem[n]);
+				throw std::out_of_range("element out of range");
+			};
 
-			reference				back() { return (_elem[_size - 1]); }
-			const_reference			back() const { return (_elem[_size - 1]); }
+			reference			back()				{	return _elem[_size - 1];		};
+			const_reference		back() const		{	return _elem[_size - 1];		};
 
-			iterator				begin() { return (iterator(_elem)); }
-			const_iterator			begin() const { return (const_iterator(_elem)); }
+			iterator			begin() 			{	return iterator(_elem); 		};
+			const_iterator		begin() const 		{	return const_iterator(_elem);	};
 
-			size_type				capacity() const { return (_capacity); }
+			size_type			capacity() const 	{	return _capacity; 				};
 
-			void					clear() { erase(begin(), end()); }
+			void				clear() 			{	erase(begin(), end()); 			};
 
-			bool					empty() const { return (_size == 0); }
+			bool				empty() const		{	return _size == 0; 				};
 
-			iterator				end() { return (iterator(_elem + _size)); }
-			const_iterator			end() const { return (const_iterator(_elem + _size)); }
+			iterator			end() 				{	return iterator(_elem + _size); 		};
+			const_iterator		end() const 		{	return const_iterator(_elem + _size);   };
 
 
-			iterator				erase(iterator position)
+			iterator				erase( iterator position )
 			{
 				size_type			val = position - begin();
 
@@ -127,11 +127,10 @@ namespace ft
 					_alloc.construct(&_elem[i], _elem[i + 1]);
 					_alloc.destroy(&_elem[i + 1]);
 				}
-
 				return (iterator(&_elem[val]));
 			}
 
-			iterator				erase(iterator first, iterator last)
+			iterator				erase( iterator first, iterator last )
 			{
 				size_type			diff = last - first;
 
@@ -146,13 +145,13 @@ namespace ft
 					++first;
 				}
 				_size -= diff;
-				return (last - diff);
+				return last - diff;
 			}
 
-			reference				front() { return (_elem[0]); }
-			const_reference 		front() const { return (_elem[0]); }
+			reference				front() 				{	return _elem[0];		};
+			const_reference 		front() const 			{	return _elem[0];		};
 
-			allocator_type			get_allocator() const { return (_alloc); }
+			allocator_type			get_allocator() const	{	return (_alloc); 		};
 
 			iterator				insert(iterator position, const value_type& val)
 			{
@@ -267,97 +266,7 @@ namespace ft
 				std::swap(_size, x._size);
 			}
 
-			template < class U >
-			class Iterator
-			{
-				public:
 
-					typedef ptrdiff_t								difference_type;
-					typedef U										value_type;
-					typedef U*										pointer;
-					typedef U&										reference;
-					typedef std::random_access_iterator_tag			iterator_category;
-
-					Iterator(void): _it() {}
-					Iterator(pointer it): _it(it) {}
-					Iterator(const Iterator& it): _it(it._it) {}
-					~Iterator(void) {}
-
-					pointer			base() const { return (_it); }
-
-					Iterator		operator=(const Iterator& rhs)
-					{
-						this->_it = rhs.base();
-						return (*this);
-					}
-
-					Iterator		operator+(difference_type n) const { return (Iterator(this->base() + n)); }
-
-					Iterator&	operator++()
-					{
-						this->_it += 1;
-						return (*this);
-					}
-
-					Iterator	operator++(int)
-					{
-						Iterator(temp) = *this;
-						this->_it += 1;
-						return (temp);
-					}
-
-					Iterator&	operator+=(difference_type n)
-					{
-						this->_it += n;
-						return (*this);
-					}
-
-					Iterator	operator-(difference_type n) const { return (Iterator(this->base() - n)); }
-
-					Iterator&	operator--()
-					{
-						this->_it -= 1;
-						return (*this);
-					}
-
-					Iterator	operator--(int)
-					{
-						Iterator(temp) = *this;
-						--(*this);
-						return (temp);
-					}
-
-					Iterator	operator-=(difference_type n)
-					{
-						this->_it -= n;
-						return (*this);
-					}
-
-					reference		operator*() { return (*_it); }
-					const_reference	operator*() const { return (*_it); }
-
-					pointer			operator->() { return &(operator*()); }
-					const_pointer	operator->() const { return &(operator*()); }
-
-					reference		operator[] (difference_type n) { return (this->base()[n]); }
-					const_reference	operator[] (difference_type n) const { return (this->base()[n]); }
-
-					friend Iterator			operator+(difference_type n, Iterator const& rhs)		{ return rhs + n; }
-					friend difference_type	operator-(const Iterator& lhs, const Iterator& rhs) { return (&(*lhs) - &(*rhs)); }
-
-					friend bool				operator==(const Iterator& lhs, const Iterator& rhs) { return (lhs.base() == rhs.base()); }
-					friend bool				operator!=(const Iterator& lhs, const Iterator& rhs) { return (lhs.base() != rhs.base()); }
-					friend bool				operator>(const Iterator& lhs, const Iterator& rhs) { return (lhs.base() > rhs.base()); }
-					friend bool				operator<=(const Iterator& lhs, const Iterator& rhs) { return (lhs.base() <= rhs.base()); }
-					friend bool				operator<(const Iterator& lhs, const Iterator& rhs) { return (lhs.base() < rhs.base()); }
-					friend bool 			operator>=(const Iterator& lhs, const Iterator& rhs) { return (lhs.base() >= rhs.base()); }
-
-					operator const_iterator () const						{ return const_iterator(_it); }
-
-				private:
-
-					pointer	_it;
-			};
 
 		private:
 

@@ -6,11 +6,12 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 11:22:01 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/11 13:19:13 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/11 20:00:07 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include <stack>
+# include <deque>
 # include <iostream>
 
 # include "../src/stack.hpp"
@@ -18,101 +19,94 @@
 
 void	std_constructor(void)
 {
-	std::vector<int> myvector (2,200);        // vector with 2 elements
+  	std::vector<int> myvector (2,200);        // vector with 2 elements
 
-	std::stack<int> first;                    // empty stack
+  	std::stack<int> first;                    // empty stack
 
-	std::stack<int,std::vector<int> > second;  // empty stack using vector
-	std::stack<int,std::vector<int> > third (myvector);
+  	std::stack<int,std::vector<int> > second;  // empty stack using vector
+  	std::stack<int,std::vector<int> > third (myvector);
 
-	std::cout << "sizes: " << first.size() << ", " << second.size() << ", " << third.size();
-	std::cout << std::endl;
+  	std::cout << "size of first: " << first.size() << '\n';
+  	std::cout << "size of second: " << second.size() << '\n';
+  	std::cout << "size of third: " << third.size() << '\n';
 }
 
 void	ft_constructor(void)
 {
-	ft::vector<int> myvector (2,200);        // vector with 2 elements
+  	ft::vector<int> myvector (2,200);        // vector with 2 elements
 
-	ft::stack<int> first;                    // empty stack
+  	ft::stack<int> first;                    // empty stack
 
-	ft::stack<int,ft::vector<int> > second;  // empty stack using vector
-	ft::stack<int,ft::vector<int> > third (myvector);
+  	ft::stack<int,ft::vector<int> > second;  // empty stack using vector
+  	ft::stack<int,ft::vector<int> > third (myvector);
 
-	std::cout << "sizes: " << first.size() << ", " << second.size() << ", " << third.size();
-	std::cout << std::endl;
+  	std::cout << "size of first: " << first.size() << '\n';
+  	std::cout << "size of second: " << second.size() << '\n';
+  	std::cout << "size of third: " << third.size() << '\n';
 }
 
 void	std_empty(void)
 {
-	std::stack<int> mystack;
-	int sum (0);
+ 	std::stack<int> mystack;
+  	int sum (0);
 
-	for (int i=1;i<=10;i++) mystack.push(i);
-
-	while (!mystack.empty())
-	{
-		sum += mystack.top();
-		mystack.pop();
-	}
-
-	std::cout << "total: " << sum;
-	std::cout << std::endl;
+  	for (int i=1;i<=10;i++) mystack.push(i);
+  	while (!mystack.empty())
+  	{
+    	sum += mystack.top();
+    	mystack.pop();
+  	}
+  	std::cout << "total: " << sum << '\n';
 }
 
 void	ft_empty(void)
 {
-	ft::stack<int> mystack;
-	int sum (0);
+ 	ft::stack<int> mystack;
+  	int sum (0);
 
-	for (int i=1;i<=10;i++) mystack.push(i);
-
-	while (!mystack.empty())
-	{
-		sum += mystack.top();
-		mystack.pop();
-	}
-
-	std::cout << "total: " << sum;
-	std::cout << std::endl;
+  	for (int i=1;i<=10;i++) mystack.push(i);
+  	while (!mystack.empty())
+  	{
+    	sum += mystack.top();
+    	mystack.pop();
+  	}
+  	std::cout << "total: " << sum << '\n';
 }
 
 void	std_size(void)
 {
 	std::stack<int> myints;
-	std::cout << "sizes: " << myints.size();
+	std::cout << "0. size: " << myints.size() << '\n';
 
 	for (int i=0; i<5; i++) myints.push(i);
-	std::cout << ", " << myints.size();
+	std::cout << "1. size: " << myints.size() << '\n';
 
 	myints.pop();
-	std::cout << ", " << myints.size();
-	std::cout << std::endl;
+	std::cout << "2. size: " << myints.size() << '\n';
 }
 
 void	ft_size(void)
 {
 	ft::stack<int> myints;
-	std::cout << "sizes: " << myints.size();
+	std::cout << "0. size: " << myints.size() << '\n';
 
 	for (int i=0; i<5; i++) myints.push(i);
-	std::cout << ", " << myints.size();
+	std::cout << "1. size: " << myints.size() << '\n';
 
 	myints.pop();
-	std::cout << ", " << myints.size();
-	std::cout << std::endl;
+	std::cout << "2. size: " << myints.size() << '\n';
 }
 
 void	std_top(void)
 {
 	std::stack<int> mystack;
 
-	mystack.push(10);
-	mystack.push(20);
+ 	mystack.push(10);
+  	mystack.push(20);
 
-	mystack.top() -= 5;
+  	mystack.top() -= 5;
 
-	std::cout << "mystack.top() is now " << mystack.top();
-	std::cout << std::endl;
+  	std::cout << "mystack.top() is now " << mystack.top() << '\n';
 }
 
 void	ft_top(void)
@@ -124,11 +118,10 @@ void	ft_top(void)
 
 	mystack.top() -= 5;
 
-	std::cout << "mystack.top() is now " << mystack.top();
-	std::cout << std::endl;
+	std::cout << "mystack.top() is now " << mystack.top() << '\n';
 }
 
-void	std_push(void)
+void	std_push_pop(void)
 {
 	std::stack<int> mystack;
 
@@ -143,37 +136,7 @@ void	std_push(void)
 	std::cout << std::endl;
 }
 
-void	ft_push(void)
-{
-	ft::stack<int> mystack;
-
-	for (int i=0; i<5; ++i) mystack.push(i);
-
-	std::cout << "Popping out elements...";
-	while (!mystack.empty())
-	{
-		std::cout << ' ' << mystack.top();
-		mystack.pop();
-	}
-	std::cout << std::endl;
-}
-
-void	std_pop(void)
-{
-	std::stack<int> mystack;
-
-	for (int i=0; i<5; ++i) mystack.push(i);
-
-	std::cout << "Popping out elements...";
-	while (!mystack.empty())
-	{
-		std::cout << ' ' << mystack.top();
-		mystack.pop();
-	}
-	std::cout << std::endl;
-}
-
-void	ft_pop(void)
+void	ft_push_pop(void)
 {
 	ft::stack<int> mystack;
 
@@ -248,8 +211,7 @@ int	main(void)
 	test_it(ft_empty, std_empty, "empty");
 	test_it(ft_size, std_size, "size");
 	test_it(ft_top, std_top, "top");
-	test_it(ft_push, std_push, "push");
-	test_it(ft_pop, std_pop, "pop");
+	test_it(ft_push_pop, std_push_pop, "push and pop");
 	test_it(ft_relational_operators, std_relational_operators, "operators");
 	test_it(ft_swaps, std_swaps, "swap (stack)");
 	return (0);
