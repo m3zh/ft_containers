@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 09:13:46 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/11 14:22:04 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/13 10:08:11 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ namespace ft
 		{
 			if (!(*first1 == *first2))
 				return false;
-
 			++first1;
 			++first2;
 		}
@@ -36,7 +35,6 @@ namespace ft
 		{
 			if (!pred(*first1,*first2))
 				return false;
-
 			++first1;
 			++first2;
 		}
@@ -52,7 +50,6 @@ namespace ft
 				return false;
 			else if (*first1 < *first2)
 				return true;
-
 			++first1;
 			++first2;
 		}
@@ -68,7 +65,6 @@ namespace ft
 				return false;
 			else if (comp(*first1, *first2))
 				return true;
-
 			++first1;
 			++first2;
 		}

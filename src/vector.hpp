@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:03 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/13 09:42:11 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/13 10:09:49 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,10 +259,10 @@ namespace ft
 
 			void					swap(vector& x)
 			{
-				std::swap(_alloc, x._alloc);
-				std::swap(_capacity, x._capacity);
-				std::swap(_elem, x._elem);
-				std::swap(_size, x._size);
+				ft::swap(_alloc, x._alloc);
+				ft::swap(_capacity, x._capacity);
+				ft::swap(_elem, x._elem);
+				ft::swap(_size, x._size);
 			}
 
 
@@ -311,6 +311,6 @@ namespace ft
 
 	template <class T, class Alloc>
 	void	swap(vector<T,Alloc>& x, vector<T,Alloc>& y) { x.swap(y); }
-}
+};
 
 #endif
