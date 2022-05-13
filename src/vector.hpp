@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:03 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/12 23:41:39 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/13 09:42:11 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ namespace ft
 			typedef typename allocator_type::pointer			pointer;
 			typedef typename allocator_type::const_pointer		const_pointer;
 
-			typedef Iterator< T >									iterator;
-			typedef Iterator< const T >								const_iterator;
+			typedef Iterator< T >								iterator;
+			typedef Iterator< const T >							const_iterator;
 			typedef ft::reverse_iterator<iterator>				reverse_iterator;
 			typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 			typedef size_t										size_type;
@@ -70,11 +70,10 @@ namespace ft
 			void	assign( InputIterator first, InputIterator last,
 							typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0 )
 			{
-				size_type			n = ft::distance(first, last);
+				size_type	n = ft::distance(first, last);
 
 				clear();
-				if (n > _capacity)
-					reserve(n);
+				if (n > _capacity)	reserve(n);
 				for (size_type i = 0; i < n; i += 1)
 					_alloc.construct(_elem + i, *first++);
 				_size = n;
