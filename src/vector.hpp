@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:03 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/17 21:41:43 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/17 22:01:31 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,64 +111,54 @@ namespace ft
 				throw std::out_of_range("element out of range");
 			};
 
-			reference				operator[](size_type n)			{		return _elem[n];				};
-			const_reference			operator[](size_type n) const	{		return _elem[n];				};
+			reference				operator[](size_type n)			{		return _elem[n];								};
+			const_reference			operator[](size_type n) const	{		return _elem[n];								};
 
-			reference				front() 						{		return _elem[0];				};
-			const_reference 		front() const 					{		return _elem[0];				};
+			reference				front() 						{		return _elem[0];								};
+			const_reference 		front() const 					{		return _elem[0];								};
 
-			reference				back()							{		return _elem[_size - 1];		};
-			const_reference			back() const					{		return _elem[_size - 1];		};
+			reference				back()							{		return _elem[_size - 1];						};
+			const_reference			back() const					{		return _elem[_size - 1];						};
 
 			value_type*				data()							{		if (_size)	return &_elem[0];	return 0;		};
 			const value_type*		data() const					{		if (_size)	return &_elem[0];	return 0;		};
 
-			iterator			begin() 			{	return iterator(_elem); 		};
-			const_iterator		begin() const 		{	return const_iterator(_elem);	};
+			// [	ITERATORS	]
+			iterator				begin() 						{		return iterator(_elem); 						};
+			const_iterator			begin() const 					{		return const_iterator(_elem);					};
+			iterator				end() 							{		return iterator(_elem + _size); 				};
+			const_iterator			end() const 					{		return const_iterator(_elem + _size);   		};
+			reverse_iterator		rbegin() 						{		return reverse_iterator(end());					};
+			const_reverse_iterator	rbegin() const  				{		return const_reverse_iterator(end());			};
+			reverse_iterator		rend() 							{		return reverse_iterator(begin());				};
+			const_reverse_iterator	rend() const 					{		return const_reverse_iterator(begin());			};
 
-			size_type			capacity() const 	{	return _capacity; 				};
-
-			void				clear() 			{	erase(begin(), end()); 			};
-
-			bool				empty() const		{	return _size == 0; 				};
-
-			iterator			end() 				{	return iterator(_elem + _size); 		};
-			const_iterator		end() const 		{	return const_iterator(_elem + _size);   };
-
-
-			iterator				erase( iterator position )
+			// [	CAPACITY	]
+			size_type				size() const					{		return _size; 									};
+			size_type				max_size() const 				{		return _alloc.max_size();						};
+			
+			void	reserve(size_type n)
 			{
-				size_type			val = position - begin();
-
-				_size -= 1;
-				_alloc.destroy(&_elem[val]);
-				for (size_type i = val; i < _size; i += 1)
+				if (n <= _capacity)	return ;
+				n = _new_capacity(n);
+				if (n > max_size())
+					throw std::length_error("requested allocation size is greater than max size");
+				value_type	*vec = _alloc.allocate(n);
+				for (size_type i = 0; i < _size; i += 1)
 				{
-					_alloc.construct(&_elem[i], _elem[i + 1]);
-					_alloc.destroy(&_elem[i + 1]);
+					_alloc.construct(&vec[i], _elem[i]);
+					_alloc.destroy(&_elem[i]);
 				}
-				return iterator(&_elem[val]);
+				_alloc.deallocate(_elem, _capacity);
+				_elem = vec;
+				_capacity = n;
 			}
+			
+			bool					empty() const					{		return _size == 0; 								};
+			size_type				capacity() const 				{		return _capacity; 								};
 
-			iterator				erase( iterator first, iterator last )
-			{
-				size_type			diff = last - first;
-
-				while (first != end() - diff)
-				{
-					*first = first[diff];
-					++first;
-				}
-				while (first != end())
-				{
-					_alloc.destroy(&(*first));
-					++first;
-				}
-				_size -= diff;
-				return last - diff;
-			}
-
-
+			// [	MODIFIERS	]
+			void					clear() 						{		erase(begin(), end()); 							};
 
 			iterator				insert(iterator position, const value_type& val)
 			{
@@ -217,49 +207,54 @@ namespace ft
 					_size += 1;
 				}
 			}
+			
+			iterator				erase( iterator position )
+			{
+				size_type			val = position - begin();
 
-			size_type				max_size() const { return _alloc.max_size(); }
+				_size -= 1;
+				_alloc.destroy(&_elem[val]);
+				for (size_type i = val; i < _size; i += 1)
+				{
+					_alloc.construct(&_elem[i], _elem[i + 1]);
+					_alloc.destroy(&_elem[i + 1]);
+				}
+				return iterator(&_elem[val]);
+			}
 
+			iterator				erase( iterator first, iterator last )
+			{
+				size_type			diff = last - first;
 
+				while (first != end() - diff)
+				{
+					*first = first[diff];
+					++first;
+				}
+				while (first != end())
+				{
+					_alloc.destroy(&(*first));
+					++first;
+				}
+				_size -= diff;
+				return last - diff;
+			}
 
-			void					pop_back() 						{		_alloc.destroy(&_elem[--_size]);		};
 			void					push_back(const value_type& val)
 			{
 				if (_size == _capacity)
 					reserve(_new_capacity(_size + 1));
 				_alloc.construct(_elem + _size, val);
 				_size += 1;
-			}
+			};
 
-			reverse_iterator		rbegin() 		{	return reverse_iterator(end());				};
-			const_reverse_iterator	rbegin() const  {	return const_reverse_iterator(end());		};
-			reverse_iterator		rend() 			{	return reverse_iterator(begin());			};
-			const_reverse_iterator	rend() const 	{	return const_reverse_iterator(begin());		};
-
-			void	reserve(size_type n)
-			{
-				if (n <= _capacity)	return ;
-				n = _new_capacity(n);
-				if (n > max_size())
-					throw std::length_error("requested allocation size is greater than max size");
-				value_type	*vec = _alloc.allocate(n);
-				for (size_type i = 0; i < _size; i += 1)
-				{
-					_alloc.construct(&vec[i], _elem[i]);
-					_alloc.destroy(&_elem[i]);
-				}
-				_alloc.deallocate(_elem, _capacity);
-				_elem = vec;
-				_capacity = n;
-			}
+			void					pop_back() 						{		_alloc.destroy(&_elem[--_size]);		};
 
 			void	resize(size_type n, value_type val = value_type())
 			{
 				while (n < _size)	pop_back();
 				while (n > _size)	push_back(val);
 			}
-
-			size_type				size() const { return _size; }
 
 			void					swap(vector& x)
 			{
@@ -286,6 +281,7 @@ namespace ft
 			size_type		_size;
 	};
 
+	// [	NON MEMBERS FUNCTION	]
 	template <class T, class Alloc>
 	bool	operator == (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
 	{
