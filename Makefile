@@ -6,34 +6,54 @@
 #    By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/06 09:20:39 by mlazzare          #+#    #+#              #
-#    Updated: 2022/05/11 10:56:27 by mlazzare         ###   ########.fr        #
+#    Updated: 2022/05/17 20:21:42 by mlazzare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = container
+NAME = containers
+VECTOR = vector
+STACK = stack
+MAP = map
+SUBJECT = subject
 
-CC = c++ #-fsanitize=address -g
+CXX = c++
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+SRCS	=	tests/main.cpp					\
+			#tests/vector.cpp				\
+			#tests/map.cpp					\
+			#tests/stack.cpp					\
+			#tests/subject.cpp
 
-vector:
-	@$(CC) $(CFLAGS) tests/vector.cpp -o $(NAME)
+INC		=	src/map.hpp						\
+			src/stack.hpp					\
+			src/vector.hpp					\
 
-stack:
-	@$(CC) $(CFLAGS) tests/stack.cpp -o $(NAME)
 
-map:
-	@$(CC) $(CFLAGS) tests/map.cpp -o $(NAME)
+all: $(NAME)
 
-clean:
-	@rm -rf $(OBJ)
-	@rm -rf *.dSYM
+$(NAME): $(SRCS) $(INC)
+	$(CXX) $(CXXFLAGS) $(SRCS) -D ALL=1 -o $@
+
+$(SUBJECT): $(SRCS)  $(INC)
+	$(CXX) $(CXXFLAGS) $(SRCS) -D SUBJECT=1 -o $@
+
+$(VECTOR): $(SRCS)  $(INC)
+	$(CXX) $(CXXFLAGS) $(SRCS) -D VECTOR=1 -o $@
+
+$(MAP): $(SRCS)  $(INC)
+	$(CXX) $(CXXFLAGS) $(SRCS) -D MAP=1 -o $@
+
+$(STACK): $(SRCS) $(INC)
+	$(CXX) $(CXXFLAGS) $(SRCS) -D STACK=1 -o $@
+
+clean: fclean
 
 fclean:
-	@rm -rf $(OBJ)
-	@rm -rf $(NAME)
-	@rm -rf *.dSYM
+	rm -f $(NAME)
+	rm -f $(VECTOR)
+	rm -f $(MAP)
+	rm -f $(STACK)
+	rm -f $(SUBJECT)
 
-re:	fclean all
-
-.PHONY: all clean re fclean
+re: fclean all

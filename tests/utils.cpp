@@ -6,9 +6,12 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 08:57:16 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/11 13:14:28 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/17 19:21:10 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+# ifndef UTILS_CPP
+# define UTILS_CPP
 
 # include <iostream>
 # include <iomanip>
@@ -41,21 +44,23 @@ void	print_timestamp(struct timeval start, struct timeval end)
     std::cout << " microsec )" << std::endl;
 }
 
-void	test_it(void (*f1)(void), void (*f2)(void), std::string title)
+void	test_it(void (*ft)(void), void (*std)(void), std::string title)
 {
 	std::cout << std::endl;
 	header(title);
 
 	struct timeval start, end;
     gettimeofday(&start, NULL);
-	f1();
+	ft();
 	gettimeofday(&end, NULL);
 	print_timestamp(start, end);
 
 	gettimeofday(&start, NULL);
-	f2();
+	std();
 	gettimeofday(&end, NULL);
 	print_timestamp(start, end);
 
 	std::cout << std::endl;
 }
+
+# endif
