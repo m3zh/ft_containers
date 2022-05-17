@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 10:47:47 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/09 21:37:00 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/17 23:15:06 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,8 @@ class treeIterator
         treeIterator		operator ++ ( int )							    {   treeIterator ptr(*this); operator++(); return ptr;  }
         treeIterator		operator -- ( int )							    {   treeIterator ptr(*this); operator--(); return ptr;  }
 
-        bool			    operator == ( treeIterator const& t )	const	{   return _node == t._node;    }
-        bool			    operator != ( treeIterator const& t )	const	{   return _node != t._node;    }
+        bool    			operator == ( treeIterator const& t )	const	{   return _node == t._node;    }
+        bool    			operator != ( treeIterator const& t )	const	{   return _node != t._node;    }
         
         private:
             treeNode*			    _node;

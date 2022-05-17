@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 10:14:41 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/13 10:07:26 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/17 23:15:25 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ namespace ft
 			typedef typename iterator_traits<Iterator>::pointer				pointer;
 			typedef typename iterator_traits<Iterator>::reference			reference;
 
-		protected:
+		private:
 			Iterator _it;
 
 		public:

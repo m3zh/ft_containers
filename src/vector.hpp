@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:03 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/17 22:01:31 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/17 23:10:57 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -283,31 +283,31 @@ namespace ft
 
 	// [	NON MEMBERS FUNCTION	]
 	template <class T, class Alloc>
-	bool	operator == (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
+	bool	operator == (const vector<T,Alloc>& l, const vector<T,Alloc>& r)
 	{
-		if (lhs.size() != rhs.size())	return false;
-		return ft::equal(lhs.begin(), lhs.end(), rhs.begin());
+		if (l.size() != r.size())	return false;
+		return ft::equal(l.begin(), l.end(), r.begin());
 	};
 
 	template <class T, class Alloc>
-	bool	operator != ( const vector<T,Alloc>& lhs,
-						 const vector<T,Alloc>& rhs )		{	return !(lhs == rhs);		};
+	bool	operator != ( const vector<T,Alloc>& l,
+						 const vector<T,Alloc>& r )			{	return !(l == r);		};
 
 	template <class T, class Alloc>
-	bool	operator < ( const vector<T,Alloc>& lhs,
-						 const vector<T,Alloc>& rhs )		{	return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());		};
+	bool	operator < ( const vector<T,Alloc>& l,
+						 const vector<T,Alloc>& r )			{	return ft::lexicographical_compare(l.begin(), l.end(), r.begin(), r.end());		};
 
 	template <class T, class Alloc>
-	bool	operator <= ( const vector<T,Alloc>& lhs,
-						 const vector<T,Alloc>& rhs )		{	return !(rhs < lhs);	};
+	bool	operator <= ( const vector<T,Alloc>& l,
+						 const vector<T,Alloc>& r )			{	return !(r < l);	};
 
 	template <class T, class Alloc>
-	bool	operator > ( const vector<T,Alloc>& lhs,
-						 const vector<T,Alloc>& rhs )		{	return rhs < lhs;		};
+	bool	operator > ( const vector<T,Alloc>& l,
+						 const vector<T,Alloc>& r )			{	return r < l;		};
 
 	template <class T, class Alloc>
-	bool	operator >= ( const vector<T,Alloc>& lhs,
-						 const vector<T,Alloc>& rhs )		{	return !(lhs < rhs);	};
+	bool	operator >= ( const vector<T,Alloc>& l,
+						 const vector<T,Alloc>& r )			{	return !(l < r);	};
 
 	template <class T, class Alloc>
 	void	swap(vector<T,Alloc>& x, vector<T,Alloc>& y)	{	x.swap(y);				};
