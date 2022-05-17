@@ -6,7 +6,7 @@
 #    By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/06 09:20:39 by mlazzare          #+#    #+#              #
-#    Updated: 2022/05/17 20:21:42 by mlazzare         ###   ########.fr        #
+#    Updated: 2022/05/17 20:27:46 by mlazzare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,6 @@ CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 
 SRCS	=	tests/main.cpp					\
-			#tests/vector.cpp				\
-			#tests/map.cpp					\
-			#tests/stack.cpp					\
-			#tests/subject.cpp
 
 INC		=	src/map.hpp						\
 			src/stack.hpp					\

@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 11:22:01 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/17 20:17:52 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/17 20:37:00 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -839,8 +839,9 @@ namespace vector
 	}
 }
 
-int	test_vector(void)
+void	test_vector(void)
 {
+	header("VECTOR");
 	test_it(vector::ft_constructor, vector::std_constructor, "constructor");
 	test_it(vector::ft_operator_equal, vector::std_operator_equal, "operator=");
 	test_it(vector::ft_begin_end, vector::std_begin_end, "begin_end");
@@ -865,5 +866,4 @@ int	test_vector(void)
 	test_it(vector::ft_get_allocator, vector::std_get_allocator, "get_allocator");
 	test_it(vector::ft_relational_operators, vector::std_relational_operators, "operators");
 	test_it(vector::ft_swapv, vector::std_swapv, "swap (vector)");
-	return (0);
 }

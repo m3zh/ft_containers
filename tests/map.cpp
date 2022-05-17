@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 08:57:16 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/17 20:17:01 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/17 20:36:42 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -672,7 +672,7 @@ namespace map
 	}
 }
 
-int	test_map(void)
+void	test_map(void)
 {
 	header("MAP");
 	test_it(map::ft_constructor, map::std_constructor, "constructor");
@@ -690,5 +690,4 @@ int	test_map(void)
 	test_it(map::ft_bounds, map::std_bounds, "lower and upper bound"); // operations
 	test_it(map::ft_equalrange, map::std_equalrange, "equal_range"); // operations
 	test_it(map::ft_allocator, map::std_allocator, "allocator"); // allocator
-	return (0);
 }

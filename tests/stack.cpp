@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 11:22:01 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/17 20:11:13 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/17 20:37:13 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,7 +207,7 @@ namespace stack
 	}
 }
 
-int	test_stack(void)
+void	test_stack(void)
 {
 	header("STACK");
 	test_it(stack::ft_constructor, stack::std_constructor, "constructor");
@@ -217,5 +217,4 @@ int	test_stack(void)
 	test_it(stack::ft_push_pop, stack::std_push_pop, "push and pop");
 	test_it(stack::ft_relational_operators, stack::std_relational_operators, "operators");
 	test_it(stack::ft_swaps, stack::std_swaps, "swap (stack)");
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 08:57:16 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/17 20:14:35 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/17 20:39:24 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 #include "stack.cpp"
 #include "vector.cpp"
 #include "utils.cpp"
-// #include "subject.cpp"
+#include "subject.cpp"
 
 int main( void )
 {
@@ -52,7 +52,7 @@ int main( void )
 		test_map();
 	if (ALL || STACK)
 		test_stack();
-	// if (ALL || SUBJECT)
-	// 	test_subject(2, 180);
+	if (SUBJECT)
+		test_subject(2);
 	return 0;
 };
