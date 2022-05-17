@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 11:03:03 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/17 23:10:57 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/17 23:17:31 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <algorithm>
 
 # include "type_traits.hpp"
-# include "iterator.hpp"
+# include "vector_iterator.hpp"
 # include "algorithm.hpp"
 
 namespace ft

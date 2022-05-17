@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 11:22:01 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/17 20:37:00 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/17 23:18:55 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # include	<iostream>
 
 # include	"../src/vector.hpp"
-# include	"../src/iterator.hpp"
+# include	"../src/vector_iterator.hpp"
 # include 	"utils.cpp"
 
 
