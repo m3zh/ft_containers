@@ -6,7 +6,7 @@
 #    By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/06 09:20:39 by mlazzare          #+#    #+#              #
-#    Updated: 2022/05/17 20:27:46 by mlazzare         ###   ########.fr        #
+#    Updated: 2022/05/17 21:22:07 by mlazzare         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ SRCS	=	tests/main.cpp					\
 INC		=	src/map.hpp						\
 			src/stack.hpp					\
 			src/vector.hpp					\
-
 
 all: $(NAME)
 
@@ -46,10 +45,10 @@ $(STACK): $(SRCS) $(INC)
 clean: fclean
 
 fclean:
-	rm -f $(NAME)
-	rm -f $(VECTOR)
-	rm -f $(MAP)
-	rm -f $(STACK)
-	rm -f $(SUBJECT)
+	@rm -f $(NAME)
+	@rm -f $(VECTOR)
+	@rm -f $(MAP)
+	@rm -f $(STACK)
+	@rm -f $(SUBJECT)
 
 re: fclean all
