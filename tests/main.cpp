@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 08:57:16 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/20 22:19:37 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/20 22:46:43 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -970,7 +970,7 @@ namespace stack
 
 void	vector_tests(void)
 {
-	header("VECTOR");
+	container_header("VECTOR");
 	test_it(vector::ft_constructor, "constructor");
 	test_it(vector::ft_operator_equal, "operator=");
 	test_it(vector::ft_begin_end, "begin_end");
@@ -999,7 +999,7 @@ void	vector_tests(void)
 
 void	map_tests(void)
 {
-	header("MAP");
+	container_header("MAP");
 	test_it(map::ft_constructor, "constructor");
 	test_it(map::ft_iterators, "iterators");
 	test_it(map::ft_empty, "empty and size");
@@ -1019,7 +1019,7 @@ void	map_tests(void)
 
 void	stack_tests(void)
 {
-	header("STACK");
+	container_header("STACK");
 	test_it(stack::ft_constructor, "constructor");
 	test_it(stack::ft_empty, "empty");
 	test_it(stack::ft_size, "size");
@@ -1030,7 +1030,8 @@ void	stack_tests(void)
 }
 
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
 	if (argc != 2)
 	{
 		std::cerr << "Usage: ./test seed" << std::endl;
@@ -1041,7 +1042,7 @@ int main(int argc, char** argv) {
 	const int seed = atoi(argv[1]);
 	srand(seed);
 
-	//test_it(subject_tests, "SUBJECT TESTS");
+	test_it(subject_tests, "SUBJECT TESTS");
 	vector_tests();
 	map_tests();
 	stack_tests();

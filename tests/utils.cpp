@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 08:57:16 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/18 21:05:10 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/20 22:46:00 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	test_header(std::string title)
     std::cout << "\n---------------------------\n";
 }
 
-void	header(std::string title)
+void	container_header(std::string title)
 {
 	std::cout << "---------------------------\n";
 	int space = (20 - title.length()) / 2;
@@ -50,6 +50,7 @@ void	print_timestamp(struct timeval start, struct timeval end)
 	suseconds_t time_taken;
   
     time_taken = end.tv_usec - start.tv_usec;
+	time_taken = (time_taken + (end.tv_usec - start.tv_usec));
 
 	std::cout << "( " << std::fixed
          << time_taken << std::setprecision(2);
