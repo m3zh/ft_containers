@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type_traits.hpp                                    :+:      :+:    :+:   */
+/*   enable_if.hpp  	                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPE_TRAITS
-# define TYPE_TRAITS
+#ifndef ENABLE_IF
+# define ENABLE_IF
 
 namespace ft
 {
@@ -67,11 +67,12 @@ namespace ft
 		is_integral<bool>				:	public true_type		{};
 
 	template<typename T>
-		void	swap(T &first, T& second) {
-			T	tmp = first;
-			first = second;
-			second = tmp;
-		}
+	void	swap(T &first, T& second)
+	{
+		T	tmp = first;
+		first = second;
+		second = tmp;
+	};
 };
 
 #endif

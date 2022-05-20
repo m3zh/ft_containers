@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 10:47:47 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/17 23:17:39 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/18 20:51:29 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 # include <memory> // std::allocator
 # include <cmath>
 
-# include "type_traits.hpp"
+# include "enable_if.hpp"
 # include "vector_iterator.hpp"
 # include "RBTree_iterator.hpp"
-# include "algorithm.hpp"
+# include "equal.hpp"
 # include "pair.hpp"
 
 template < class T, class Compare = std::less< T >, class Alloc = std::allocator<T> >
@@ -490,8 +490,6 @@ class RBTree
             }
             node->color = BLACK;
         };
-        
-        treeNode    *get_end()     const                         {           return NIL;        };
 };
 
 #endif

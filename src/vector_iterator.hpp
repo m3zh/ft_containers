@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iterator.hpp                                       :+:      :+:    :+:   */
+/*   vector_iterator.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 10:14:41 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/17 23:15:25 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/20 22:35:24 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 # include <vector>
 # include <cstddef>
 # include <iterator>
-# include "type_traits.hpp"
+# include "enable_if.hpp"
 
 namespace ft
 {
 	// [ ITERATOR TRAITS ]
-	template < class Iterator >
+	template < class iterator >
 	struct iterator_traits
 	{
-		typedef typename Iterator::difference_type		difference_type;
-		typedef typename Iterator::value_type			value_type;
-		typedef typename Iterator::pointer				pointer;
-		typedef typename Iterator::reference			reference;
-		typedef typename Iterator::iterator_category	iterator_category;
+		typedef typename iterator::difference_type		difference_type;
+		typedef typename iterator::value_type			value_type;
+		typedef typename iterator::pointer				pointer;
+		typedef typename iterator::reference			reference;
+		typedef typename iterator::iterator_category	iterator_category;
 	};
 
 	template < class T >
@@ -63,7 +63,7 @@ namespace ft
 	
 	// [ ITERATOR ]
 	template < class U >
-	class Iterator
+	class iterator
 	{
 		public:
 
@@ -74,25 +74,25 @@ namespace ft
 			typedef U&										reference;
 			typedef const U&								const_reference;
 			typedef std::random_access_iterator_tag			iterator_category;
-			typedef Iterator< const U >						const_iterator;
+			typedef iterator< const U >						const_iterator;
 
-			Iterator(void)					:	_it()		{};
-			Iterator(pointer it)			:	_it(it) 	{};
-			Iterator(const Iterator& it)	:	_it(it._it) {};
-			~Iterator(void)									{};
+			iterator(void)					:	_it()		{};
+			iterator(pointer it)			:	_it(it) 	{};
+			iterator(const iterator& it)	:	_it(it._it) {};
+			~iterator(void)									{};
 
 			pointer			base() const 	{	return  _it;	};
 
-			Iterator	operator = (const Iterator& r)				{	_it = r.base();	return  *this;		};
-			Iterator	operator + (difference_type n) const		{	return  Iterator(base() + n);		};
-			Iterator&	operator ++ ()								{	_it += 1;	return  *this;			};
-			Iterator	operator ++ (int)							{	Iterator(tmp) = *this; _it += 1; return  tmp;	};
-			Iterator&	operator += (difference_type n)				{	_it += n;	return  *this;			};
+			iterator	operator = (const iterator& r)				{	_it = r.base();	return  *this;		};
+			iterator	operator + (difference_type n) const		{	return  iterator(base() + n);		};
+			iterator&	operator ++ ()								{	_it += 1;	return  *this;			};
+			iterator	operator ++ (int)							{	iterator(tmp) = *this; _it += 1; return  tmp;	};
+			iterator&	operator += (difference_type n)				{	_it += n;	return  *this;			};
 
-			Iterator	operator - (difference_type n) const 		{ 	return  Iterator(base() - n); 		};
-			Iterator&	operator -- ()								{	_it -= 1; return  *this;			};
-			Iterator	operator -- (int)							{	Iterator(tmp) = *this; _it--; return  tmp;	}; // to check
-			Iterator	operator-=(difference_type n)				{	_it -= n;	return  *this;			};
+			iterator	operator - (difference_type n) const 		{ 	return  iterator(base() - n); 		};
+			iterator&	operator -- ()								{	_it -= 1; return  *this;			};
+			iterator	operator -- (int)							{	iterator(tmp) = *this; _it--; return  tmp;	}; // to check
+			iterator	operator-=(difference_type n)				{	_it -= n;	return  *this;			};
 
 			reference		operator*() 							{	return  *_it;						};
 			const_reference	operator*() const 						{	return  *_it;						};
@@ -103,36 +103,44 @@ namespace ft
 			reference		operator[] (difference_type n) 			{	return  base()[n];					};
 			const_reference	operator[] (difference_type n) const 	{ 	return  base()[n];					};
 
-			friend Iterator			operator + (difference_type n, Iterator const& r)		{	return r + n;	};
-			friend difference_type	operator - (const Iterator& l, const Iterator& r) 		{	return  &(*l) - &(*r);	};
+			// friend iterator			operator + (difference_type n, iterator const& r)		{	return r + n;	};
+			// friend difference_type	operator - (const iterator& l, const iterator& r) 		{	return  &(*l) - &(*r);	};
 
-			friend bool		operator == (const Iterator& l, const Iterator& r) 		{	return  l.base() == r.base();	};
-			friend bool		operator != (const Iterator& l, const Iterator& r)		{	return  l.base() != r.base();	};
-			friend bool		operator > (const Iterator& l, const Iterator& r) 		{	return  l.base() > r.base();	};
-			friend bool		operator <= (const Iterator& l, const Iterator& r) 		{	return  l.base() <= r.base();	};
-			friend bool		operator < (const Iterator& l, const Iterator& r) 		{	return  l.base() < r.base();	};
-			friend bool 	operator >= (const Iterator& l, const Iterator& r) 		{	return  l.base() >= r.base();	};
+			friend bool		operator == (const iterator& l, const iterator& r) 		{	return  l.base() == r.base();	};
+			friend bool		operator != (const iterator& l, const iterator& r)		{	return  l.base() != r.base();	};
+			friend bool		operator > (const iterator& l, const iterator& r) 		{	return  l.base() > r.base();	};
+			friend bool		operator <= (const iterator& l, const iterator& r) 		{	return  l.base() <= r.base();	};
+			friend bool		operator < (const iterator& l, const iterator& r) 		{	return  l.base() < r.base();	};
+			friend bool 	operator >= (const iterator& l, const iterator& r) 		{	return  l.base() >= r.base();	};
 
 			operator 	const_iterator () const						{	return const_iterator(_it);		};
 
 		private:
 			pointer	_it;
 	};
+	// [	NON MEMBERS FUNCTION	]
+	template <class Iter>
+	iterator<Iter>	operator + ( typename iterator<Iter>::difference_type n,
+										 const iterator<Iter>& it )									{		return  it + n;			};
+
+	template <class Iter1, class Iter2>
+	typename iterator<Iter1>::difference_type operator - ( const iterator<Iter1>& l,	
+																   const iterator<Iter2>& r )		{		return  l.base() - r.base(); };
 
 	// [	REVERSE ITERATOR	]
-	template <class Iterator>
+	template <class iterator>
 	class reverse_iterator
 	{
 		public:
-			typedef Iterator												iterator_type;
-			typedef typename iterator_traits<Iterator>::iterator_category	iterator_category;
-			typedef typename iterator_traits<Iterator>::value_type			value_type;
-			typedef typename iterator_traits<Iterator>::difference_type		difference_type;
-			typedef typename iterator_traits<Iterator>::pointer				pointer;
-			typedef typename iterator_traits<Iterator>::reference			reference;
+			typedef iterator												iterator_type;
+			typedef typename iterator_traits<iterator>::iterator_category	iterator_category;
+			typedef typename iterator_traits<iterator>::value_type			value_type;
+			typedef typename iterator_traits<iterator>::difference_type		difference_type;
+			typedef typename iterator_traits<iterator>::pointer				pointer;
+			typedef typename iterator_traits<iterator>::reference			reference;
 
 		private:
-			Iterator _it;
+			iterator _it;
 
 		public:
 			reverse_iterator()										:	_it() 					{};

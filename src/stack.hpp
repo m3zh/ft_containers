@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:35:46 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/17 23:09:05 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/18 21:21:13 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ namespace ft
 	{
 		public:
 
-			typedef T			value_type;
-			typedef Container	container_type;
-			typedef ptrdiff_t	size_type;
+			typedef T							value_type;
+			typedef Container					container_type;
+			typedef size_t						size_type;
 
 			// [ MEMBER FUNCTIONS ]
 			explicit			stack(const container_type& ctnr = container_type()): c(ctnr) {}
@@ -35,7 +35,6 @@ namespace ft
 			const value_type&	top() const 				{	return c.back();		};
 			void				push(const value_type& val) { 	c.push_back(val); 		};
 			void				pop() 						{	c.pop_back();			};
-			container_type		get_c()						{	return c;				};
 
 			// [ RELATIONAL OPERATORS ]
 			friend bool operator == (stack const & l, stack const & r)				{		return l.c == r.c;			};
