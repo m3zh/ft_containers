@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 10:14:41 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/20 22:35:24 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/20 22:40:23 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ namespace ft
 		private:
 			pointer	_it;
 	};
-	// [	NON MEMBERS FUNCTION	]
+	// [	NON MEMBER FUNCTIONS	]
 	template <class Iter>
 	iterator<Iter>	operator + ( typename iterator<Iter>::difference_type n,
 										 const iterator<Iter>& it )									{		return  it + n;			};
