@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 10:14:41 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/20 22:40:23 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/23 18:50:38 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,6 @@ namespace ft
 			reference		operator[] (difference_type n) 			{	return  base()[n];					};
 			const_reference	operator[] (difference_type n) const 	{ 	return  base()[n];					};
 
-			// friend iterator			operator + (difference_type n, iterator const& r)		{	return r + n;	};
-			// friend difference_type	operator - (const iterator& l, const iterator& r) 		{	return  &(*l) - &(*r);	};
-
 			friend bool		operator == (const iterator& l, const iterator& r) 		{	return  l.base() == r.base();	};
 			friend bool		operator != (const iterator& l, const iterator& r)		{	return  l.base() != r.base();	};
 			friend bool		operator > (const iterator& l, const iterator& r) 		{	return  l.base() > r.base();	};
@@ -113,7 +110,7 @@ namespace ft
 			friend bool		operator < (const iterator& l, const iterator& r) 		{	return  l.base() < r.base();	};
 			friend bool 	operator >= (const iterator& l, const iterator& r) 		{	return  l.base() >= r.base();	};
 
-			operator 	const_iterator () const						{	return const_iterator(_it);		};
+			operator 		const_iterator () const									{	return const_iterator(_it);		};
 
 		private:
 			pointer	_it;

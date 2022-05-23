@@ -6,7 +6,7 @@
 /*   By: mlazzare <mlazzare@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 07:34:38 by mlazzare          #+#    #+#             */
-/*   Updated: 2022/05/18 20:51:40 by mlazzare         ###   ########.fr       */
+/*   Updated: 2022/05/23 18:50:16 by mlazzare         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ namespace ft
 	{
 		// [ MEMBER TYPES ]
 		public:
-			class 												value_compare; // defined later
+			class 												value_compare; // defined on line 71
 
 			typedef Key                                         			key_type;
 			typedef	T			 											mapped_type;
