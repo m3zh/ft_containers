@@ -25,19 +25,19 @@ template<
 Example for vector  
 How member types are written in the MAN  
 ```
-value_type 	        T
-allocator_type 	    Allocator
-iterator	        a random access iterator to value_type	convertible to const_iterator
-const_iterator	    a random access iterator to const value_type
-size_type 	        Unsigned integer type (usually std::size_t) 
+value_type          T
+allocator_type      Allocator
+iterator            a random access iterator to value_type	convertible to const_iterator
+const_iterator      a random access iterator to const value_type
+size_type           Unsigned integer type (usually std::size_t) 
 ```
 How member types are re-written the code  
 ```
-typedef	T							value_type;
-typedef Alloc						allocator_type;
-typedef ft::iterator< T >			iterator;
-typedef ft::iterator< const T >		const_iterator;
-typedef size_t						size_type;
+typedef	T                           value_type;
+typedef Alloc                       allocator_type;
+typedef ft::iterator< T >           iterator;
+typedef ft::iterator< const T >     const_iterator;
+typedef size_t                      size_type;
 ```
 Extra: to check, difference between typedef and typename  
 
