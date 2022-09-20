@@ -33,11 +33,11 @@ size_type 	        Unsigned integer type (usually std::size_t)
 ```
 How member types are re-written the code  
 ```
-typedef	T														value_type;
-typedef Alloc													allocator_type;
-typedef ft::iterator< T >										iterator;
-typedef ft::iterator< const T >									const_iterator;
-typedef size_t													size_type;
+typedef	T							value_type;
+typedef Alloc						allocator_type;
+typedef ft::iterator< T >			iterator;
+typedef ft::iterator< const T >		const_iterator;
+typedef size_t						size_type;
 ```
 Extra: to check, difference between typedef and typename  
 
