@@ -48,7 +48,7 @@ size_type size() const; # https://cplusplus.com/reference/vector/vector/size/
 ```
 How member functions are re-written the code  
 ```
-size_type				size() const					{		return _size; 	    };
+size_type       size() const    {		return _size; 	    };
 ```
 ### Non-Member Functions
 Writing non-member functions _inside_ the template class
